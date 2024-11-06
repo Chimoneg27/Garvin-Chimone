@@ -15,7 +15,7 @@ function App() {
       .then(response => {
         setProjects(response.data.sort((a, b) => {
           return new Date(b.updated_at) - new Date(a.updated_at)
-        }).slice(0, 5))
+        }).slice(1, 4))
       })
   }, [])
 
