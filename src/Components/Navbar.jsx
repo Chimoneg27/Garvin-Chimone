@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="p-6 flex flex-row justify-between">
       <h2 className="text-4xl font-bold w-1/5">GARVIN</h2>
 
-      <div className="w-20 flex flex-row justify-between text-4xl">
+      <div className="w-20 flex flex-row justify-between text-4xl items-center">
         <a href="https://www.linkedin.com/in/garvin-chimone/" target="_blank">
           <LinkedInIcon fontSize="inherit" className="w-1/2">
             LinkedIn
