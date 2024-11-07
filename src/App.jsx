@@ -5,6 +5,7 @@ import './index.css'
 import Navbar from './Components/Navbar'
 import Intro from './Components/Intro'
 import Projects from './Components/Projects'
+import Languages from './Components/Languages'
 
 function App() {
   const [projects, setProjects] = useState([])
@@ -24,6 +25,7 @@ function App() {
       <Navbar  />
       <Intro />
       <Projects gitArr={projects}/>
+      <Languages />
     </div>
   )
 }
