@@ -39,16 +39,21 @@ body {
 	color: transparent;
 }
 
-section{
-	--itemWidth: min(300px, 30vw);
-	--itemWidthMinus: calc(-1 * var(--itemWidth));
-	height: max-content;
-	width: max-content;
-	display: grid;
-	grid-template-rows: repeat(2, max-content);
-	grid-template-columns: repeat(3, calc(3vw + var(--itemWidth)));
-	font-family: 'Averia Serif Libre';
+section {
+    --itemWidth: min(300px, 30vw);
+    --itemWidthMinus: calc(-1 * var(--itemWidth));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between items */
+    justify-content: center;
+    align-items: center;
 }
+
+.item {
+    width: var(--itemWidth);
+    height: var(--itemWidth);
+}
+
 .item:first-of-type{
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg);
 }
@@ -59,6 +64,32 @@ section{
 .item:nth-of-type(3){
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/640px-Ruby_logo.svg.png);
 }
+
+.item:nth-of-type(4){
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/640px-React_Logo_SVG.svg.png);
+}
+
+.item:nth-of-type(5){
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/640px-Postgresql_elephant.svg.png);
+}
+
+.item:nth-of-type(6){
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Git_format.png/640px-Git_format.png);
+}
+
+.item:nth-of-type(7){
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/640px-Visual_Studio_Code_1.35_icon.svg.png);
+}
+
+.item:nth-of-type(8){
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/2023_Obsidian_logo.svg/800px-2023_Obsidian_logo.svg.png);
+}
+
+.item:nth-of-type(9){
+    background-image: url(https://t3.ftcdn.net/jpg/05/79/77/36/360_F_579773687_JnaiR9fiXtddRUHaWf72RkAwmkdMC1sR.jpg);
+}
+
+/**/
 
 .item > span {
 	width: 80%;
