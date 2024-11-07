@@ -1,7 +1,7 @@
 const Projects = ({ gitArr }) => {
     return (
         <div className="w-full p-3 flex flex-col items-center">
-          <h2 className="text-4xl font-bold mt-4 mb-4">Here are some of my projects</h2>
+          <h2 className="text-4xl font-semibold mt-4 mb-4">Here are some of my projects</h2>
           
           <div className="p-3 w-9/12 mt-5 flex flex-col items-center justify-center">
             {
