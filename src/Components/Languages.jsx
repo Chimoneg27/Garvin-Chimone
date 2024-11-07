@@ -1,6 +1,6 @@
 const Languages = () => {
     return (
-        <h2>I can use the following languages</h2>
+        <h2>The languages and frameworks I use</h2>
     )
 }
 
