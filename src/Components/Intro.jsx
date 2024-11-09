@@ -1,13 +1,54 @@
-const Intro = () => {
-    return (
-        <div className="flex flex-col items-center p-2 justify-between mt-48 h-40 mb-16">
-           <h1 className="w-2/4 text-7xl text-center font-bold">GARVIN CHIMONE</h1>
+import styles from "../styles/Intro.module.css"
+import { useState, useEffect } from "react"
 
-           <p className="w-1/2 text-center text-2xl">
-              Hello! I&apos;m Garvin, a web developer dedicated to delivering top-notch solutions for your needs.
-           </p>
-        </div>
-    )
+const Intro = () => {
+  const [windowsWidth, setWindowsWidth] = useState(0)
+
+  useEffect(() => {
+    setWindowsWidth(window.innerWidth)
+  }, [])
+
+  const getBlocks = () => {
+    const blockSize = windowsWidth * 0.05
+    const nbOfBlocks = Math.ceil(window.innerHeight / blockSize)
+    return [...Array(nbOfBlocks).keys()].map((_, index) => {
+        return <div onMouseEnter={(e) => {colorize(e.target)}} key={index}></div>
+    })
+  }
+
+  const colorize = (el) => {
+    el.style.backgroundColor = 'black'
+
+    setTimeout( () => {
+      el.style.backgroundColor = 'transparent';
+    }, 300)
+  }
+
+  return (
+    <div
+      className={`${styles.container} w-auto h-auto mb-20 flex flex-col items-center justify-center`}
+    >
+      <div className={`${styles.body} flex flex-col items-center p-2 justify-between h-40`}>
+        <h1 className="w-2/4 text-7xl text-center font-bold">GARVIN CHIMONE</h1>
+
+        <p className="w-1/2 text-center text-2xl">
+          Hello! I&apos;m Garvin, a web developer dedicated to delivering top-notch solutions for
+          your needs.
+        </p>
+      </div>
+
+      <div className={styles.grid}>
+        {windowsWidth > 0 &&
+          [...Array(20).keys()].map((_, index) => {
+            return (
+              <div key={"b_" + index} className={styles.column}>
+                {getBlocks()}
+              </div>
+            )
+          })}
+      </div>
+    </div>
+  )
 }
 
 export default Intro
