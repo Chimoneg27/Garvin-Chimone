@@ -89,8 +89,6 @@ section {
     background-image: url(https://t3.ftcdn.net/jpg/05/79/77/36/360_F_579773687_JnaiR9fiXtddRUHaWf72RkAwmkdMC1sR.jpg);
 }
 
-/**/
-
 .item > span {
 	width: 80%;
 	user-select: none; -moz-user-select: none; -webkit-user-select: none;
