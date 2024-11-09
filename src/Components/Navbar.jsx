@@ -3,7 +3,7 @@ import GitHubIcon from "@mui/icons-material/GitHub"
 
 const Navbar = () => {
   return (
-    <nav className="p-6 flex flex-row justify-between">
+    <nav className="p-6 flex flex-row justify-between mb-10">
       <h2 className="text-4xl font-bold w-1/5">GARVIN</h2>
 
       <div className="w-20 flex flex-row justify-between text-4xl items-center">

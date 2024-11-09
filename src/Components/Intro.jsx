@@ -26,7 +26,7 @@ const Intro = () => {
 
   return (
     <div
-      className={`${styles.container} w-auto h-auto mb-20 flex flex-col items-center justify-center`}
+      className={`${styles.container} w-auto h-auto mt-20 mb-20 flex flex-col items-center justify-center`}
     >
       <div className={`${styles.body} flex flex-col items-center p-2 justify-between h-40`}>
         <h1 className="w-2/4 text-7xl text-center font-bold">GARVIN CHIMONE</h1>
