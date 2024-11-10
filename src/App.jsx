@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar'
 import Intro from './Components/Intro'
 import Projects from './Components/Projects'
 import Languages from './Components/Languages'
+import About from './Components/About'
 
 function App() {
   const [projects, setProjects] = useState([])
@@ -26,6 +27,7 @@ function App() {
       <Intro />
       <Projects gitArr={projects}/>
       <Languages />
+      <About />
     </div>
   )
 }

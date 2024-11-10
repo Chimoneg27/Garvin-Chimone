@@ -26,12 +26,12 @@ const Intro = () => {
 
   return (
     <div
-      className={`${styles.container} w-full h-auto mt-20 mb-20 flex flex-col items-center justify-center`}
+      className={`${styles.container} w-full h-auto mt-20 mb-10 flex flex-col items-center justify-center`}
     >
       <div className={`${styles.body} flex flex-col items-center p-2 justify-between h-40`}>
-        <h1 className="w-full text-3xl text-center font-bold">GARVIN CHIMONE</h1>
+        <h1 className="w-full text-4xl text-center font-bold">GARVIN CHIMONE</h1>
 
-        <p className="w-full mt-4 text-center text-lg">
+        <p className="w-full mt-4 text-center text-xl">
           Hello! I&apos;m Garvin, a web developer dedicated to delivering top-notch solutions for
           your needs.
         </p>
