@@ -21,7 +21,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div className="w-full">
       <Navbar  />
       <Intro />
       <Projects gitArr={projects}/>
