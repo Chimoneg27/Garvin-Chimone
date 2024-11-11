@@ -1,7 +1,7 @@
 const Languages = () => {
   return (
     <div className="mt-20 flex flex-col items-center w-full">
-      <h2 className="text-3xl w-11/12 font-semibold mb-16 text-center">The languages, frameworks and tools I use</h2>
+      <h2 className="text-3xl w-11/12 font-semibold mb-16 text-center lg:text-4xl">The languages, frameworks and tools I use</h2>
 
       <div className="mt-8">
         <section>
