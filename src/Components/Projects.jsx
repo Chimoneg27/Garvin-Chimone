@@ -7,7 +7,7 @@ const Projects = ({ gitArr }) => {
           {
             gitArr.map((project) => {
               return (
-                <div key={project.id} className="w-11/12 h-auto mt-3 mb-3 flex flex-col items-center justify-between border border-black p-2 rounded-md">
+                <div key={project.id} className="w-11/12  mt-3 mb-3 flex flex-col items-center justify-between border border-black p-2 rounded-md h-52">
                   <h3 className="text-xl lg:text-3xl font-bold">{project.name}</h3>
 
                   {project.description === null ? <p className="text-lg lg:text-xl">No description yet</p> : <p className="text-lg lg:text-2xl text-center">{project.description}</p>}
@@ -22,6 +22,10 @@ const Projects = ({ gitArr }) => {
             })
           }
         </div>
+
+        <button className="border-black border-2 p-1 font-bold rounded-sm w-1/2 hover:bg-black hover:text-white">
+          <a href="https://github.com/Chimoneg27?tab=repositories" target="_blank">See More</a>
+        </button>
       </div>
   )
 }

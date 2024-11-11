@@ -31,7 +31,7 @@ const Intro = () => {
       <div className={`${styles.body} flex flex-col items-center p-2 justify-between h-40`}>
         <h1 className="w-full text-4xl lg:text-5xl text-center font-bold">GARVIN CHIMONE</h1>
 
-        <p className="w-full mt-4 lg:text-3xl lg:w-4/5 text-center text-xl">
+        <p className="w-full mt-4 lg:text-3xl lg:w-4/5 text-center text-lg">
           Hello! I&apos;m Garvin, a web developer dedicated to delivering top-notch solutions for
           your needs.
         </p>

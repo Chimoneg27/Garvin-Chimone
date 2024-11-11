@@ -2,7 +2,7 @@ import CountUp from "react-countup";
 const About = () => {
     return (
         <div className="mt-10 bg-black text-white p-2 md:flex md:flex-col md:items-center">
-          <h2 className="text-5xl sm:text-center">About Me</h2>
+          <h2 className="text-5xl sm:text-center mt-4">About Me</h2>
 
           <p className="mt-4 sm:text-center md:w-2/3 lg:text-xl lg:w-4/5">
           A brief intro about me. My name is Garvin Chimone. 
