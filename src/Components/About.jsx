@@ -1,3 +1,4 @@
+import CountUp from "react-countup";
 const About = () => {
     return (
         <div className="mt-10 bg-black text-white p-2">
@@ -12,10 +13,10 @@ const About = () => {
           <h2 className="text-4xl mt-6 mb-6 w-full text-center">Extras</h2>
 
           <h3 className="text-3xl w-full text-center mb-1">Age</h3>
-          <p className="text-md w-full text-center mb-4">22</p>
+          <p className="text-md w-full text-center mb-4"><CountUp start={0} end={22} duration={3} enableScrollSpy /></p>
 
           <h3 className="text-3xl w-full text-center mb-1">Commits</h3>
-          <p className="text-md w-full text-center mb-4">2605</p>
+          <p className="text-md w-full text-center mb-4"><CountUp start={0} end={2605} duration={5} /></p>
 
           <h3 className="text-3xl w-full text-center mb-1">Favorite Artist</h3>
           <p className="text-md w-full text-center mb-4">Kanye West</p>
