@@ -18,9 +18,6 @@ const About = () => {
           <h3 className="text-3xl lg:text:4xl w-full text-center mb-1">Commits</h3>
           <p className="text-md w-full lg:text-xl text-center mb-4"><CountUp start={0} end={2605} duration={5} enableScrollSpy /></p>
 
-          <h3 className="text-3xl lg:text:4xl w-full text-center mb-1">Favorite Artist</h3>
-          <p className="text-md w-full lg:text-xl text-center mb-4">Kanye West</p>
-
           <h3 className="text-3xl lg:text:4xl w-full text-center mb-1">Currently Reading</h3>
           <p className="text-md w-full lg:text-xl text-center mb-4">The Bourne Trilogy</p>
 

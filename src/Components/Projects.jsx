@@ -23,7 +23,7 @@ const Projects = ({ gitArr }) => {
           }
         </div>
 
-        <button className="border-black border-2 p-1 font-bold rounded-sm w-1/2 hover:bg-black hover:text-white">
+        <button className="border-black border-2 p-1 font-bold rounded-sm w-1/2 hover:bg-black hover:text-white lg:w-44">
           <a href="https://github.com/Chimoneg27?tab=repositories" target="_blank">See More</a>
         </button>
       </div>
