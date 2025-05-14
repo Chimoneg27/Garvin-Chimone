@@ -1,10 +1,11 @@
 import './index.css'
+import NavList from './Components/NavList'
 
 function App() {
 
   return (
     <div className="w-full">
-      <h1>This is update 1</h1>
+      <NavList />
     </div>
   )
 }
