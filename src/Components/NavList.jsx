@@ -1,4 +1,5 @@
-import React from "react";
+import SettingsIcon from '@mui/icons-material/Settings';
+import { useEffect, useState } from 'react';
 import {
   Navbar,
   Collapse,
@@ -9,9 +10,9 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export function NavList() {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 960) setOpenNav(false);
     };
@@ -44,13 +45,13 @@ export function NavList() {
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium text-xl"
+            className="mr-4 cursor-pointer py-1.5 text-xl font-bold"
           >
             GC
           </Typography>
           <div className="mr-4 hidden lg:block">{navList}</div>
           <Button variant="gradient" size="sm" className="hidden lg:inline-block text-base">
-            <span>Get started</span>
+            <span><SettingsIcon /></span>
           </Button>
           <IconButton
             variant="text"
@@ -67,7 +68,7 @@ export function NavList() {
         <Collapse open={openNav}>
           {navList}
           <Button fullWidth variant="gradient" size="sm" className="text-base">
-            <span>Get started</span>
+            <span><SettingsIcon /></span>
           </Button>
         </Collapse>
       </Navbar>
