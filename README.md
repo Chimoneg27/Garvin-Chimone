@@ -15,6 +15,8 @@ This project is designed to highlight my capabilities in creating responsive and
 * Tailwind CSS: For utility-first CSS framework
 
 ## Features
+<!-- https://icons8.com/icon/843/folder -->
+<!-- https://icons8.com/icon/2828/opened-folder -->
 
 * Responsive design
 * Modern UI components
