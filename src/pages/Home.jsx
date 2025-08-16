@@ -1,7 +1,7 @@
 import closedFolder from "../assets/closedFolder.png";
 import openFolder from "../assets/openFolder.png";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Home = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
@@ -19,13 +19,18 @@ const Home = () => {
             tabIndex={0}
             className="text-lg font-semibold flex flex-col justify-between items-center"
           >
-            <img
-              src={hoveredId === "dev" ? openFolder : closedFolder}
-              height={250}
-              width={250}
-              alt="Dev folder"
-            />
-            <h2>Dev</h2>
+            <Link
+              to="/Dev"
+              className="flex flex-col justify-between items-center"
+            >
+              <img
+                src={hoveredId === "dev" ? openFolder : closedFolder}
+                height={250}
+                width={250}
+                alt="Dev folder"
+              />
+              <h2>Dev</h2>
+            </Link>
           </li>
           <li
             onMouseEnter={() => setHoveredId("music")}
@@ -35,13 +40,18 @@ const Home = () => {
             tabIndex={0}
             className="text-lg font-semibold flex flex-col justify-between items-center"
           >
-            <img
-              src={hoveredId === "music" ? openFolder : closedFolder}
-              height={250}
-              width={250}
-              alt="Music folder"
-            />
-            <h2>Music</h2>
+            <Link
+              to="/MusicLibrary"
+              className="flex flex-col justify-between items-center"
+            >
+              <img
+                src={hoveredId === "music" ? openFolder : closedFolder}
+                height={250}
+                width={250}
+                alt="Music folder"
+              />
+              <h2>Music</h2>
+            </Link>
           </li>
           <li
             onMouseEnter={() => setHoveredId("books")}
@@ -51,13 +61,18 @@ const Home = () => {
             tabIndex={0}
             className="text-lg font-semibold flex flex-col justify-between items-center"
           >
-            <img
-              src={hoveredId === "books" ? openFolder : closedFolder}
-              height={250}
-              width={250}
-              alt="Books folder"
-            />
-            <h2>Books</h2>
+            <Link
+              to="/Books"
+              className="flex flex-col justify-between items-center"
+            >
+              <img
+                src={hoveredId === "books" ? openFolder : closedFolder}
+                height={250}
+                width={250}
+                alt="Books folder"
+              />
+              <h2>Books</h2>
+            </Link>
           </li>
           <li
             onMouseEnter={() => setHoveredId("movies")}
@@ -67,13 +82,18 @@ const Home = () => {
             tabIndex={0}
             className="text-lg font-semibold flex flex-col justify-between items-center"
           >
-            <img
-              src={hoveredId === "movies" ? openFolder : closedFolder}
-              height={250}
-              width={250}
-              alt="Movies and series folder"
-            />
-            <h2>Movies & Series</h2>
+            <Link
+              to="/Movies&TV"
+              className="flex flex-col justify-between items-center"
+            >
+              <img
+                src={hoveredId === "movies" ? openFolder : closedFolder}
+                height={250}
+                width={250}
+                alt="Movies and series folder"
+              />
+              <h2>Movies & Series</h2>
+            </Link>
           </li>
         </ul>
       </div>

@@ -3,5 +3,5 @@ export default function Dev() {
     <div>
       <h1>Dev Portfolio</h1>
     </div>
-  )
+  );
 }
