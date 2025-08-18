@@ -1,4 +1,4 @@
-# My New Portfolio
+# Garvin Chimone
 
 Welcome to my portfolio project! This repository showcases my frontend development skills using React, JavaScript, CSS, and Tailwind CSS, built with Vite.
 
