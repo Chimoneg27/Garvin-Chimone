@@ -97,6 +97,13 @@ export default function Dev() {
 
         <Slider />
       </div>
+
+      <div className="p-3">
+        <h2 className="text-6xl font-bold">Contact Me</h2>
+
+        <p>Want to hire me or want to connect fill in the form below</p>
+        {'coming soon'}
+      </div>
     </div>
   );
 }
