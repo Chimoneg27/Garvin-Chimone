@@ -1,13 +1,24 @@
 import SplitText from "../components/SplitText";
 // import garvin from '../assets/garvin.png'
 import basq from "../assets/Basquiat.jpeg";
-
-const modules = import.meta.glob('../assets/*.svg', { eager: true, query: '?url', import: 'default'})
-const svgImages = Object.values(modules)
+import cv from '../assets/GarvinCV.pdf'
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
 };
+
+function handleClick() {
+  const link = document.createElement('a')
+  const pdfURL = cv
+  link.href = pdfURL;
+
+  link.setAttribute("download", "GarvinCV.pdf")
+  document.body.appendChild(link)
+
+  link.click()
+
+  document.body.removeChild(link)
+}
 
 export default function Dev() {
   return (
@@ -47,7 +58,7 @@ export default function Dev() {
         <div className="w-3/5 flex flex-col items-start">
           <h2 className="text-xl font-semibold">About</h2>
 
-          <h1 className="text-3xl font-semibold">Who Am I</h1>
+          <h1 className="text-3xl mt-6 font-semibold">Who Am I</h1>
           <p className="text-left pl-2 mt-3 text-lg font-light w-12/12">
             I’m Garvin Chimone, a full-stack software engineer with experience
             in both frontend and backend development. I’ve worked with
@@ -60,18 +71,9 @@ export default function Dev() {
             developing the technical depth to take ideas from vision to reality.
           </p>
 
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold">Tech Stack</h2>
-
-            <ul className="list-none flex gap-3 flex-wrap mt-16">
-              {
-                svgImages.map((src, i) => (
-                  <li key={i} className="w-20 h-20">
-                    <img  src={src} alt={`imgae-${i}`} className="w-20 h-20"/>
-                  </li>
-                ))
-              }
-            </ul>
+          <div className="mt-12 w-4/5">
+            <h2 className="text-2xl font-bold">My CV</h2>
+            <button onClick={handleClick} className="p-2 border-solid rounded-lg text-base font-bold text-white w-3/3 bg-black mt-3">Download CV</button>
           </div>
         </div>
 
