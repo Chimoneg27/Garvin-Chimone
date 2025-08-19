@@ -1,23 +1,24 @@
 import SplitText from "../components/SplitText";
-// import garvin from '../assets/garvin.png'
 import basq from "../assets/Basquiat.jpeg";
-import cv from '../assets/GarvinCV.pdf'
+import cv from "../assets/GarvinCV.pdf";
+import Slider from "../components/Slider";
+
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
 };
 
 function handleClick() {
-  const link = document.createElement('a')
-  const pdfURL = cv
+  const link = document.createElement("a");
+  const pdfURL = cv;
   link.href = pdfURL;
 
-  link.setAttribute("download", "GarvinCV.pdf")
-  document.body.appendChild(link)
+  link.setAttribute("download", "GarvinCV.pdf");
+  document.body.appendChild(link);
 
-  link.click()
+  link.click();
 
-  document.body.removeChild(link)
+  document.body.removeChild(link);
 }
 
 export default function Dev() {
@@ -73,7 +74,12 @@ export default function Dev() {
 
           <div className="mt-12 w-4/5">
             <h2 className="text-2xl font-bold">My CV</h2>
-            <button onClick={handleClick} className="p-2 border-solid rounded-lg text-base font-bold text-white w-3/3 bg-black mt-3">Download CV</button>
+            <button
+              onClick={handleClick}
+              className="p-2 border-solid rounded-lg text-base font-bold text-white w-3/3 bg-black mt-3"
+            >
+              Download CV
+            </button>
           </div>
         </div>
 
@@ -84,6 +90,12 @@ export default function Dev() {
             className="max-w-xs md:max-w-sm lg:max-w-md object-contain"
           />
         </div>
+      </div>
+
+      <div className="w-full flex flex-col justify-center items-center mt-8 mb-8 p-5">
+        <h2 className="w-4/5 text-5xl text-center font-bold mb-10">The Tech I Use</h2>
+
+        <Slider />
       </div>
     </div>
   );
