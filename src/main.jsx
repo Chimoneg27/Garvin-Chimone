@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Garvin-Chimone">
         <App />
       </BrowserRouter>
     </ThemeProvider>
