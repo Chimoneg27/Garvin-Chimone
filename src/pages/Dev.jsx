@@ -2,7 +2,8 @@ import SplitText from "../components/SplitText";
 import basq from "../assets/Basquiat.jpeg";
 import cv from "../assets/GarvinCV.pdf";
 import Slider from "../components/Slider";
-
+import geye from "../assets/GEYE.jpg"
+import BasicForm from "../components/BasicForm";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -48,7 +49,7 @@ export default function Dev() {
 
         <div className="w-2/5 flex justify-center">
           <img
-            src={basq}
+            src={geye}
             alt="Garvin Basq Logo"
             className="max-w-xs md:max-w-sm lg:max-w-md object-contain"
           />
@@ -98,11 +99,12 @@ export default function Dev() {
         <Slider />
       </div>
 
-      <div className="p-3">
-        <h2 className="text-6xl font-bold">Contact Me</h2>
+      <div className="p-6 flex flex-col justify-center items-center">
+        <h2 className="text-6xl font-bold w-full text-center">Contact Me</h2>
 
-        <p>Want to hire me or want to connect fill in the form below</p>
-        {'coming soon'}
+        <p className="text-center w-4/5 text-lg font-bold">Want to hire me or want to connect fill in the form below</p>
+
+        <BasicForm />
       </div>
     </div>
   );
