@@ -4,6 +4,7 @@ import cv from "../assets/GarvinCV.pdf";
 import Slider from "../components/Slider";
 import geye from "../assets/GEYE.jpg"
 import BasicForm from "../components/BasicForm";
+import Footer from "../components/Footer";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -106,6 +107,7 @@ export default function Dev() {
 
         <BasicForm />
       </div>
+      <Footer />
     </div>
   );
 }
