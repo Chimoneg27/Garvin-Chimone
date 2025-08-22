@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useTheme } from "./ThemeContext";
 import '../styles/form.css'
 
 export default function BasicForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const { color } = useTheme()
 
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('')
@@ -60,7 +62,7 @@ export default function BasicForm() {
         <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Enter your message..."></textarea>
       </div>
       
-      <div className="formcarry-block">  
+      <div className="formcarry-block text-lg bg-black" style={{ backgroundColor: color }}>  
         <button type="submit">Send</button>
       </div>
     </form>
