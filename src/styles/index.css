@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Borg9';
+    src: url('../assets/fonts/borg-9/Borg9.otf') format('opentype');
+}
+
 .intro {
     margin: 2rem auto;
 }
@@ -30,4 +35,9 @@ body {
     width: 3rem;
     height: 3rem;
     z-index: 50;
+}
+
+.navbar h1 {
+    font-family: 'Borg9', sans-serif;
+    font-weight: 400;
 }
