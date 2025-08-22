@@ -2,15 +2,19 @@ import closedFolder from "../assets/closedFolder.png";
 import openFolder from "../assets/openFolder.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from '../components/Footer'
+import Navbar from "../components/Navbar";
+import { useTheme } from "../components/ThemeContext";
+
 const Home = () => {
   const [hoveredId, setHoveredId] = useState(null);
+  const { color } = useTheme()
 
   return (
     <>
-      <h1 className="text-3xl">Desktop</h1>
-
+    <Navbar />
       <div className="w-full flex justify-center mt-80 mb-6">
-        <ul className="w-4/6 flex flex-row justify-between items-center p-4">
+        <ul className="w-4/6 flex flex-row justify-between items-center p-4" style={{ color: color }}>
           <li
             onMouseEnter={() => setHoveredId("dev")} // hover id is set to ensure each folder opens when hovered on
             onMouseLeave={() => setHoveredId(null)}
@@ -97,6 +101,7 @@ const Home = () => {
           </li>
         </ul>
       </div>
+      <Footer />
     </>
   );
 };

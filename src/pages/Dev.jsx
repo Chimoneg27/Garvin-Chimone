@@ -6,6 +6,7 @@ import geye from "../assets/GEYE.jpg";
 import BasicForm from "../components/BasicForm";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
+import Navbar from "../components/Navbar";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -28,6 +29,7 @@ export default function Dev() {
   const { color } = useTheme();
   return (
     <div>
+      <Navbar />
       <div className="w-4/5 flex items-center justify-start gap-12 p-6 mt-20 mr-auto ml-auto">
         <div className="w-3/5 flex flex-col items-start">
           <SplitText

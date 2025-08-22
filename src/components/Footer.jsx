@@ -5,7 +5,7 @@ export default function Footer() {
   const { toggleColor } = useTheme();
 
   return (
-    <div className="p-6 flex flex-col justify-start items-start bg-gray-100 mt-8">
+    <div className="p-6 flex flex-col justify-start items-start bg-gray-100 mt-8 relative bottom-0 w-full">
       <ul
         className={`h-1/3 w-auto p-2 flex items-center gap-2 flex-wrap rounded-lg`}
       >
