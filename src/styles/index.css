@@ -7,10 +7,27 @@
     margin: 2rem auto;
 }
 
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
 .about {
     margin: 2rem auto;
 }
 
 .heading {
     font-family: "Orbitron", sans-serif;
+}
+
+.footerCircle {
+    /* position: fixed; */
+    border-radius: 50%;
+    /* ensure the circle is visible (was off-screen with -50px) */
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* fallbacks in case Tailwind utility classes are not present */
+    width: 3rem;
+    height: 3rem;
+    z-index: 50;
 }

@@ -2,7 +2,10 @@ import SplitText from "../components/SplitText";
 import basq from "../assets/Basquiat.jpeg";
 import cv from "../assets/GarvinCV.pdf";
 import Slider from "../components/Slider";
-
+import geye from "../assets/GEYE.jpg";
+import BasicForm from "../components/BasicForm";
+import Footer from "../components/Footer";
+import { useTheme } from "../components/ThemeContext";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -22,6 +25,7 @@ function handleClick() {
 }
 
 export default function Dev() {
+  const { color } = useTheme();
   return (
     <div>
       <div className="w-4/5 flex items-center justify-start gap-12 p-6 mt-20 mr-auto ml-auto">
@@ -48,7 +52,7 @@ export default function Dev() {
 
         <div className="w-2/5 flex justify-center">
           <img
-            src={basq}
+            src={geye}
             alt="Garvin Basq Logo"
             className="max-w-xs md:max-w-sm lg:max-w-md object-contain"
           />
@@ -59,8 +63,8 @@ export default function Dev() {
         <div className="w-3/5 flex flex-col items-start">
           <h2 className="text-xl font-semibold">About</h2>
 
-          <h1 className="text-3xl mt-6 font-semibold">Who Am I</h1>
-          <p className="text-left pl-2 mt-3 text-lg font-light w-12/12">
+          <h1 className="text-3xl mt-6 font-semibold" style={{ color: color }}>Who Am I</h1>
+          <p className="text-left pl-2 mt-3 text-lg font-semibold w-12/12">
             I’m Garvin Chimone, a full-stack software engineer with experience
             in both frontend and backend development. I’ve worked with
             technologies like React, TypeScript, Node.js, Supabase, and React
@@ -77,6 +81,7 @@ export default function Dev() {
             <button
               onClick={handleClick}
               className="p-2 border-solid rounded-lg text-base font-bold text-white w-3/3 bg-black mt-3"
+              style={{ backgroundColor: color }}
             >
               Download CV
             </button>
@@ -93,17 +98,23 @@ export default function Dev() {
       </div>
 
       <div className="w-full flex flex-col justify-center items-center mt-8 mb-8 p-5">
-        <h2 className="w-4/5 text-5xl text-center font-bold mb-10">The Tech I Use</h2>
+        <h2 className="w-4/5 text-5xl text-center font-bold mb-10" style={{ color: color }}>
+          The Tech I Use
+        </h2>
 
         <Slider />
       </div>
 
-      <div className="p-3">
-        <h2 className="text-6xl font-bold">Contact Me</h2>
+      <div className="p-6 flex flex-col justify-center items-center">
+        <h2 className="text-6xl font-bold w-full text-center" style={{ color: color }}>Contact Me</h2>
 
-        <p>Want to hire me or want to connect fill in the form below</p>
-        {'coming soon'}
+        <p className="text-center w-4/5 text-lg font-bold">
+          Want to hire me or want to connect fill in the form below
+        </p>
+
+        <BasicForm />
       </div>
+      <Footer />
     </div>
   );
 }

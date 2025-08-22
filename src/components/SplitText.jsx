@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import { useTheme } from "./ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 
@@ -22,6 +23,7 @@ const SplitText = ({
   const ref = useRef(null);
   const animationCompletedRef = useRef(false);
   const scrollTriggerRef = useRef(null);
+  const { color } = useTheme()
 
   useEffect(() => {
     if (typeof window === "undefined" || !ref.current || !text) return;
@@ -139,6 +141,7 @@ const SplitText = ({
       style={{
         textAlign,
         wordWrap: "break-word",
+        color: color
       }}
     >
       {text}
