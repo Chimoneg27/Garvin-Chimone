@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Borg9';
+    src: url('../assets/fonts/borg-9/Borg9.otf') format('opentype');
+}
+
 .intro {
     margin: 2rem auto;
 }
@@ -19,15 +24,41 @@ body {
     font-family: "Orbitron", sans-serif;
 }
 
-.footerCircle {
-    /* position: fixed; */
-    border-radius: 50%;
-    /* ensure the circle is visible (was off-screen with -50px) */
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    /* fallbacks in case Tailwind utility classes are not present */
-    width: 3rem;
-    height: 3rem;
-    z-index: 50;
+footer ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+footer ul li {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+footer .footerCircle {
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important; /* Remove the translateX transform */
+  border-radius: 50%;
+  z-index: auto !important;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Ensure split text alignment */
+.split-parent {
+  width: 100%;
+}
+
+/* Remove any default browser margins that might affect centering */
+* {
+  box-sizing: border-box;
+}
+
+.navbar h1 {
+    font-family: 'Borg9', sans-serif;
+    font-weight: 400;
 }

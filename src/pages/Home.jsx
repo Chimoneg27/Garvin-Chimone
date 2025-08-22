@@ -2,102 +2,45 @@ import closedFolder from "../assets/closedFolder.png";
 import openFolder from "../assets/openFolder.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useTheme } from "../components/ThemeContext";
+
 const Home = () => {
   const [hoveredId, setHoveredId] = useState(null);
+  const { color } = useTheme();
 
   return (
-    <>
-      <h1 className="text-3xl">Desktop</h1>
-
-      <div className="w-full flex justify-center mt-80 mb-6">
-        <ul className="w-4/6 flex flex-row justify-between items-center p-4">
-          <li
-            onMouseEnter={() => setHoveredId("dev")} // hover id is set to ensure each folder opens when hovered on
-            onMouseLeave={() => setHoveredId(null)}
-            onFocus={() => setHoveredId("dev")}
-            onBlur={() => setHoveredId(null)}
-            tabIndex={0}
-            className="text-lg font-semibold flex flex-col justify-between items-center"
-          >
-            <Link
-              to="/Dev"
-              className="flex flex-col justify-between items-center"
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 w-full flex justify-center mt-20 mb-6">
+        <ul className="w-4/5 flex flex-col md:flex-row justify-between items-center gap-8 p-4" style={{ color: color }}>
+          {[
+            { id: "dev", label: "Dev", to: "/Dev" },
+            { id: "music", label: "Music", to: "/MusicLibrary" },
+            { id: "books", label: "Books", to: "/Books" },
+            { id: "movies", label: "Movies & Series", to: "/Movies&TV" },
+          ].map(({ id, label, to }) => (
+            <li
+              key={id}
+              onMouseEnter={() => setHoveredId(id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className="text-lg font-semibold flex flex-col justify-between items-center"
             >
-              <img
-                src={hoveredId === "dev" ? openFolder : closedFolder}
-                height={250}
-                width={250}
-                alt="Dev folder"
-              />
-              <h2>Dev</h2>
-            </Link>
-          </li>
-          <li
-            onMouseEnter={() => setHoveredId("music")}
-            onMouseLeave={() => setHoveredId(null)}
-            onFocus={() => setHoveredId("music")}
-            onBlur={() => setHoveredId(null)}
-            tabIndex={0}
-            className="text-lg font-semibold flex flex-col justify-between items-center"
-          >
-            <Link
-              to="/MusicLibrary"
-              className="flex flex-col justify-between items-center"
-            >
-              <img
-                src={hoveredId === "music" ? openFolder : closedFolder}
-                height={250}
-                width={250}
-                alt="Music folder"
-              />
-              <h2>Music</h2>
-            </Link>
-          </li>
-          <li
-            onMouseEnter={() => setHoveredId("books")}
-            onMouseLeave={() => setHoveredId(null)}
-            onFocus={() => setHoveredId("books")}
-            onBlur={() => setHoveredId(null)}
-            tabIndex={0}
-            className="text-lg font-semibold flex flex-col justify-between items-center"
-          >
-            <Link
-              to="/Books"
-              className="flex flex-col justify-between items-center"
-            >
-              <img
-                src={hoveredId === "books" ? openFolder : closedFolder}
-                height={250}
-                width={250}
-                alt="Books folder"
-              />
-              <h2>Books</h2>
-            </Link>
-          </li>
-          <li
-            onMouseEnter={() => setHoveredId("movies")}
-            onMouseLeave={() => setHoveredId(null)}
-            onFocus={() => setHoveredId("movies")}
-            onBlur={() => setHoveredId(null)}
-            tabIndex={0}
-            className="text-lg font-semibold flex flex-col justify-between items-center"
-          >
-            <Link
-              to="/Movies&TV"
-              className="flex flex-col justify-between items-center"
-            >
-              <img
-                src={hoveredId === "movies" ? openFolder : closedFolder}
-                height={250}
-                width={250}
-                alt="Movies and series folder"
-              />
-              <h2>Movies & Series</h2>
-            </Link>
-          </li>
+              <Link to={to} className="flex flex-col justify-between items-center">
+                <img
+                  src={hoveredId === id ? openFolder : closedFolder}
+                  className="w-32 h-32 md:w-64 md:h-64"
+                  alt={`${label} folder`}
+                />
+                <h2>{label}</h2>
+              </Link>
+            </li>
+          ))}
         </ul>
-      </div>
-    </>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
