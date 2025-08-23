@@ -25,7 +25,7 @@ function handleClick() {
 export default function Dev() {
   const { color } = useTheme();
   return (
-    <div>
+    <div className="w-full min-h-screen overflow-x-hidden">
       <Navbar />
       <div className="w-11/12 md:w-4/5 flex flex-col md:flex-row items-center justify-start gap-12 p-6 mt-20 mx-auto">
         <div className="w-full md:w-3/5 flex flex-col items-center md:items-start">
