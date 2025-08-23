@@ -83,7 +83,7 @@ export default function Dev() {
             <h2 className="text-2xl md:text-3xl font-bold">My CV</h2>
             <button
               onClick={handleClick}
-              className="p-3 rounded-lg text-lg font-bold text-white w-full md:w-auto mt-3"
+              className="p-3 rounded-lg text-lg font-bold text-white w-full md:w-auto mt-3 bg-black"
               style={{ backgroundColor: color }}
             >
               Download CV
