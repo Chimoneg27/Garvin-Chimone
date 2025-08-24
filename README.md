@@ -1,88 +1,99 @@
-# Garvin Chimone
+# Garvin Chimone — Frontend Portfolio
 
-Welcome to my portfolio project! This repository showcases my frontend development skills using React, JavaScript, CSS, and Tailwind CSS, built with Vite.
+Showcase portfolio built with React, Vite, JavaScript, CSS, and Tailwind CSS. It demonstrates responsive layouts, component-driven UI, and small interactive features highlighting front-end skills.
 
-## Project Overview
+## Quick overview
 
-This project is designed to highlight my capabilities in creating responsive and dynamic web applications. It includes various sections to demonstrate my skills and experience.
-
-## Technologies Used
-
-* React: For building the user interface
-* Vite: For fast and efficient development
-* JavaScript: The primary programming language used
-* CSS: For styling the components
-* Tailwind CSS: For utility-first CSS framework
+- Purpose: Present projects, skills, and contact information in a fast, responsive single-page app.
+- Stack: React + Vite, Tailwind CSS, plain CSS for small custom styles.
+- Live demo: https://garvin-chimone.pages.dev/
+- Source: https://github.com/Chimoneg27/Garvin-Chimone
 
 ## Features
-<!-- https://icons8.com/icon/843/folder -->
-<!-- https://icons8.com/icon/2828/opened-folder -->
 
-* Responsive design
-* Modern UI components
-* Interactive elements
-* Lightning-fast HMR with Vite
+- Responsive, mobile-first design
+- Clean, component-based structure (Navbar, Slider, Forms, Footer)
+- Easy to customize and extend
+- Fast local development with Vite (HMR)
 
-## Getting Started
+## Project structure (high level)
 
-To get a local copy up and running, follow these simple steps.
+- `src/` — React source files
+   - `components/` — reusable UI components (Navbar, Footer, forms, etc.)
+   - `pages/` — page views (Home, Dev, Music, Movies, Books)
+   - `assets/` — images, PDFs, fonts
+   - `styles/` — global and module CSS
+- `public/` — static assets served as-is
+- `package.json` — scripts and dependencies
 
-### Prerequisites
+## Local setup
 
-Make sure you have Node.js and npm installed on your machine.
-
-### Installation
+Prerequisites: Node.js (LTS) and npm.
 
 1. Clone the repo
-   ```bash
-   git clone https://github.com/Chimoneg27/Garvin-Chimone.git
-   ```
-2. Install NPM packages
-   ```bash
-   npm install
-   ```
-3. Start the development server
-   ```bash
-   npm run dev
-   ```
+
+```bash
+git clone https://github.com/Chimoneg27/Garvin-Chimone.git
+cd Garvin-Chimone
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Run the dev server
+
+```bash
+npm run dev
+```
+
 4. Build for production
-   ```bash
-   npm run build
-   ```
-5. Preview production build
-   ```bash
-   npm run preview
-   ```
 
-## Development
+```bash
+npm run build
+```
 
-Vite provides a faster and leaner development experience:
-- Hot Module Replacement (HMR)
-- Lightning-fast server start
-- Optimized build performance
-- Out-of-the-box TypeScript support
+5. Preview the production build locally
 
-## Usage
+```bash
+npm run preview
+```
 
-This project can be used as a template for creating modern and responsive web applications. Feel free to explore the code and customize it to fit your needs.
+## Component contract (concise)
+
+- Inputs: static assets and JSON data in `src/lib` (e.g., lists of items)
+- Outputs: rendered UI and client-side interactions (no server required)
+- Error modes: missing assets fall back to placeholders; build errors reported by Vite
+
+Edge cases considered:
+- No-JS: static content still accessible from `public/` assets
+- Missing images: components use fallback UI
+- Large screens / small screens: responsive breakpoints via Tailwind
+
+## Tests & quality
+
+- This repo currently doesn't include automated tests. Recommended next steps: add a small Jest/Testing Library suite for core components.
+
+## Deployment
+
+- The site is deployable as a static site (Pages, Netlify, Vercel). The current live site uses GitHub Pages / Pages.dev.
 
 ## Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Fixes, enhancements, and design tweaks welcome. Suggested workflow:
+   1. Fork the repository
+   2. Create a feature branch
+   3. Open a PR with a clear description and screenshots when applicable
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE`.
 
 ## Contact
 
-Garvin Chimone - [chimonegarvin27@gmail.com]
+Garvin Chimone — chimonegarvin27@gmail.com
 
-Project Link: [https://github.com/Chimoneg27/Garvin-Chimone](https://github.com/Chimoneg27/Garvin-Chimone)
-Live Site: [https://garvin-chimone.pages.dev/](https://garvin-chimone.pages.dev/)
+Project: https://github.com/Chimoneg27/Garvin-Chimone
+Live site: https://garvin-chimone.pages.dev/
