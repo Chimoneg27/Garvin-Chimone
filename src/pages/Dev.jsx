@@ -124,7 +124,7 @@ export default function Dev() {
         <BasicForm />
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
