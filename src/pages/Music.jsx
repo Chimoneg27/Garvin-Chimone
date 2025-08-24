@@ -2,6 +2,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
 import { useState, useEffect } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Music() {
   const { color } = useTheme();
@@ -25,8 +28,45 @@ export default function Music() {
     acc[artist] = (acc[artist] || 0) + 1
     return acc
   }, {}) : 0;
-
   const totalArtists = Object.keys(artists).length
+
+  const entriesArtists = Object.entries(artists)
+    .sort((a, b) => b[1] -a[1])
+    .slice(0, 20)
+  
+  const labels = entriesArtists.map(([name]) => name)
+  // eslint-disable-next-line no-unused-vars
+  const values = entriesArtists.map(([_, plays]) => plays)
+
+  const doughnutData = {
+    labels: labels,
+    datasets: [{
+      label: 'Play Count',
+      data: values,
+      backgroundColor: [
+        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+        '#9966FF', '#FF9F40', '#C9CBCF', '#FF5733',
+        '#33FF57', '#3357FF', '#FFC300', '#DAF7A6',
+        '#900C3F', '#581845', '#1ABC9C', '#2ECC71',
+        '#E74C3C', '#9B59B6', '#34495E', '#F39C12'
+      ],
+      borderColor: '#fff',
+      borderWidth: 2
+    }],
+  }
+
+  const doughnutAnimations = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+  },
+  animation: {
+    duration: 2000,
+    easing: 'easeOutBounce',
+  },
+}
 
   const songs = spotifyData ? spotifyData.reduce((acc, obj) => {
     const song = obj.master_metadata_track_name
@@ -81,6 +121,12 @@ export default function Music() {
 
       <div>
         <h2 className="text-3xl text-center font-bold mt-16" style={{ color: color }}>Charts</h2>
+         <ul className="list-none flex flex-col justify-center items-center w-full gap-4 mt-4">
+          <li className="flex flex-col justify-center items-center w-full">
+            <h2 className="text-3xl font-semibold" style={{ color: color }}>Top 20 Artists</h2>
+            <Doughnut data={doughnutData} options={doughnutAnimations}/>
+          </li>
+         </ul>
       </div>
       <Footer />
     </div>
