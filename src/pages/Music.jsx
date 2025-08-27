@@ -2,9 +2,16 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
 import { useState, useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Doughnut, PolarArea, Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  RadialLinearScale,
+  BarElement,
+} from "chart.js";
+ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale, BarElement);
 
 export default function Music() {
   const { color } = useTheme();
@@ -39,6 +46,30 @@ export default function Music() {
   const labels = entriesArtists.map(([name]) => name);
   // eslint-disable-next-line no-unused-vars
   const values = entriesArtists.map(([_, plays]) => plays);
+
+  const platforms = spotifyData
+    ? spotifyData.reduce((acc, obj) => {
+        const platform = obj.platform;
+        acc[platform] = (acc[platform] || 0) + 1;
+        return acc;
+      }, {})
+    : 0;
+
+  const platfromLabels = Object.keys(platforms);
+  const platfromValues = Object.values(platforms);
+
+  const polarData = {
+    labels: platfromLabels,
+    datasets: [
+      {
+        label: "Platforms Used",
+        data: platfromValues,
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+        borderColor: "#fff",
+        borderWidth: 2,
+      },
+    ],
+  };
 
   const doughnutData = {
     labels: labels,
@@ -84,19 +115,76 @@ export default function Music() {
     },
     animation: {
       duration: 2000,
-      easing: "easeOutBounce",
+      easing: "easeInOutQuart",
     },
   };
 
   const songs = spotifyData
     ? spotifyData.reduce((acc, obj) => {
         const song = obj.master_metadata_track_name;
-        acc[song] = (acc[song] || 0) + 1;
+        if (song) {
+          acc[song] = (acc[song] || 0) + 1;
+        }
         return acc;
       }, {})
     : 0;
 
   const totalSongs = Object.keys(songs).length;
+
+  const songsWithArtists = spotifyData
+    ? spotifyData.reduce((acc, obj) => {
+        const song = obj.master_metadata_track_name;
+        const artist = obj.master_metadata_album_artist_name;
+        if (song && artist) {
+          const songWithArtist = `${song} - ${artist}`;
+          acc[songWithArtist] = (acc[songWithArtist] || 0) + 1;
+        }
+        return acc;
+      }, {})
+    : 0;
+
+  const topSongs = Object.entries(songsWithArtists)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 20);
+
+  const topSongLabels = topSongs.map(([name]) => name);
+  // eslint-disable-next-line no-unused-vars
+  const topSongValues = topSongs.map(([_, plays]) => plays);
+  const pieData = {
+    labels: topSongLabels,
+    datasets: [
+      {
+        label: "Plays",
+        data: topSongValues,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.8)",
+          "rgba(54, 162, 235, 0.8)",
+          "rgba(255, 205, 86, 0.8)",
+          "rgba(75, 192, 192, 0.8)",
+          "rgba(153, 102, 255, 0.8)",
+          "rgba(255, 159, 64, 0.8)",
+          "rgba(199, 199, 199, 0.8)",
+          "rgba(83, 102, 255, 0.8)",
+          "rgba(255, 99, 255, 0.8)",
+          "rgba(54, 235, 162, 0.8)",
+          "rgba(255, 206, 84, 0.8)",
+          "rgba(46, 204, 113, 0.8)",
+          "rgba(52, 152, 219, 0.8)",
+          "rgba(155, 89, 182, 0.8)",
+          "rgba(241, 196, 15, 0.8)",
+          "rgba(230, 126, 34, 0.8)",
+          "rgba(231, 76, 60, 0.8)",
+          "rgba(26, 188, 156, 0.8)",
+          "rgba(142, 68, 173, 0.8)",
+          "rgba(22, 160, 133, 0.8)",
+        ],
+        borderColor: "#fff",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  console.log(topSongs);
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
       <Navbar />
@@ -104,7 +192,7 @@ export default function Music() {
         <h1 className="text-4xl font-bold text-center" style={{ color: color }}>
           Music Library
         </h1>
-        <p className="text-lg font-semibold text-center">
+        <p className="text-lg font-semibold text-center p-2">
           This is my Spotify data from January 2024 to August 2025
         </p>
       </div>
@@ -155,6 +243,22 @@ export default function Music() {
             </h2>
             <div className="w-[400px] h-[400px] md:w-[400px] md:h-[400px] sm:w-[400px] sm:h-[400px]">
               <Doughnut data={doughnutData} options={doughnutAnimations} />
+            </div>
+          </li>
+          <li className="flex flex-col justify-center items-center w-full">
+            <h2 className="text-3xl font-semibold" style={{ color: color }}>
+              Platfroms Used
+            </h2>
+            <div className="w-[400px] h-[400px] md:w-[400px] md:h-[400px] sm:w-[400px] sm:h-[400px]">
+              <PolarArea data={polarData} />
+            </div>
+          </li>
+          <li className="flex flex-col justify-center items-center w-full">
+            <h2 className="text-3xl font-semibold" style={{ color: color }}>
+              Top 20 Songs
+            </h2>
+            <div className="w-[400px] h-[400px] md:w-[400px] md:h-[400px] sm:w-[400px] sm:h-[400px]">
+              <Pie data={pieData} />
             </div>
           </li>
         </ul>
