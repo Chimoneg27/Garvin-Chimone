@@ -184,7 +184,6 @@ export default function Music() {
     ],
   };
 
-  console.log(topSongs);
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
       <Navbar />
