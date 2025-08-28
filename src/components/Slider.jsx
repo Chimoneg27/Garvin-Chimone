@@ -6,7 +6,6 @@ const images = import.meta.glob("../assets/*.svg", {
   import: "default",
 });
 const imagesArr = Object.values(images);
-console.log(imagesArr);
 
 const Slider = () => {
   const duplicatedSlides = [...imagesArr, ...imagesArr];
