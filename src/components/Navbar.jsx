@@ -11,10 +11,16 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
+import { useAuth } from "../auth/AuthProvider";
 
 export default function Navbar() {
   const { color } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const { user, signOut } = useAuth();
+
+  const logout = () => {
+    signOut()
+  }
 
   return (
     <nav className="p-4 flex justify-between items-center w-11/12 mx-auto relative navbar">
@@ -65,13 +71,23 @@ export default function Navbar() {
             <GitHub style={{ color: color }} fontSize="large" />
           </a>
         </li>
-        <Link to='/SignUp'>
-          <li>
-            <button className="bg-black text-white font-bold p-2 rounded-md">
-              SignUp
-            </button>
-          </li>
-        </Link>
+        {!user ? (
+          <Link to="/SignIn">
+            <li>
+              <button className="bg-black text-white font-bold p-2 rounded-md">
+                Login
+              </button>
+            </li>
+          </Link>
+        ) : (
+          <Link to="/">
+            <li onClick={logout}>
+              <button className="bg-black text-white font-bold p-2 rounded-md">
+                Logout
+              </button>
+            </li>
+          </Link>
+        )}
       </ul>
 
       <button
@@ -113,6 +129,25 @@ export default function Navbar() {
           >
             <GitHub fontSize="large" /> GitHub
           </a>
+          
+          {/* Mobile Auth Button */}
+          {!user ? (
+            <Link to="/LogIn" onClick={() => setIsOpen(false)}>
+              <button className="bg-black text-white font-bold p-2 rounded-md flex items-center gap-2">
+                Login
+              </button>
+            </Link>
+          ) : (
+            <button 
+              className="bg-black text-white font-bold p-2 rounded-md flex items-center gap-2"
+              onClick={() => {
+                logout();
+                setIsOpen(false);
+              }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       )}
     </nav>
