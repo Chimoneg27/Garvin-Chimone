@@ -72,7 +72,7 @@ export default function Navbar() {
           </a>
         </li>
         {!user ? (
-          <Link to="/SignIn">
+          <Link to="/SignIn" className="hidden md:block">
             <li>
               <button className="bg-black text-white font-bold p-2 rounded-md">
                 Login
@@ -80,7 +80,7 @@ export default function Navbar() {
             </li>
           </Link>
         ) : (
-          <Link to="/">
+          <Link to="/" className="hidden md:block">
             <li onClick={logout}>
               <button className="bg-black text-white font-bold p-2 rounded-md">
                 Logout
