@@ -57,11 +57,6 @@ export default function SignIn() {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <Link to="/">
-        <h1 className="text-3xl font-bold navbar w-full text-center">
-          GARVIN
-        </h1>
-      </Link>
       <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -117,7 +112,7 @@ export default function SignIn() {
           disabled={loading}
           className="w-full bg-black text-white py-2 px-4 rounded-md font-bold disabled:cursor-not-allowed"
         >
-          {loading ? "Logging up..." : "Log In"}
+          {loading ? "Logging in..." : "Log In"}
         </button>
 
         <Link to="/SignUp">
