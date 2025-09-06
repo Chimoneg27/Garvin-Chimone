@@ -5,19 +5,35 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function addBook(payload) {
   // Get the session first
-  const { data: { session } } = await supabase.auth.getSession();
-  
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   if (!session?.access_token) {
-    throw new Error('No active session');
+    throw new Error("No active session");
   }
 
-  const { data, error } = await supabase.functions.invoke('add-book', {
+  const { data, error } = await supabase.functions.invoke("add-book", {
     body: payload,
     headers: {
-      Authorization: `Bearer ${session.access_token}`
-    }
+      Authorization: `Bearer ${session.access_token}`,
+    },
   });
 
   if (error) throw error;
   return data;
 }
+
+const getMyBooks = async () => {
+  const { data, error } = await supabase
+    .from('books')
+    .select("*")
+
+  if(error) {
+    throw error
+  }
+
+  return data
+}
+
+export { getMyBooks }
