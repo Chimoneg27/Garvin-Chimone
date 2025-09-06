@@ -24,6 +24,24 @@ export async function addBook(payload) {
   return data;
 }
 
+export async function bookStatus(payload) {
+  const { data: {session} } = await supabase.auth.getSession()
+
+  if (!session?.access_token) {
+    throw new Error("No active session")
+  }
+
+  const { data, error } = await supabase.functions.invoke('update-book-status', {
+    body: payload,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`
+    }
+  })
+
+  if (error) throw error
+  return data
+}
+
 const getMyBooks = async () => {
   const { data, error } = await supabase
     .from('books')
