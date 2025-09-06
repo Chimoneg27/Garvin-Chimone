@@ -11,20 +11,7 @@ export default function Books() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [expandedCards, setExpandedCards] = useState(new Set());
   const { color } = useTheme();
-
-  const toggleCardExpansion = (bookId) => {
-    setExpandedCards(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(bookId)) {
-        newSet.delete(bookId);
-      } else {
-        newSet.add(bookId);
-      }
-      return newSet;
-    });
-  };
 
   const getBookStatus = (book) => {
     if (book.read) {
@@ -163,74 +150,26 @@ export default function Books() {
                     by {book.author}
                   </p>
 
-                  {/* Show Details Button - Only on large screens */}
-                  <div className="hidden lg:block mb-4">
-                    <button
-                      onClick={() => toggleCardExpansion(book.id)}
-                      className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      <span>
-                        {expandedCards.has(book.id) ? 'Hide Details' : 'Show Details'}
-                      </span>
-                      <svg 
-                        className={`w-4 h-4 transition-transform ${expandedCards.has(book.id) ? 'rotate-180' : ''}`}
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
+                  <div className="mb-4">
+                    {role === "admin" ? (
+                      <select
+                        value={
+                          book.read ? "read" : 
+                          book.reading ? "reading" : 
+                          book.want_to_read ? "want_to_read" : "not_set"
+                        }
+                        onChange={(e) => handleStatusChange(book.id, e.target.value)}
+                        className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${getBookStatus(book).bgColor} ${getBookStatus(book).textColor}`}
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Details Section - Always visible on mobile/tablet, collapsible on large screens */}
-                  <div className={`lg:overflow-hidden lg:transition-all lg:duration-300 ${
-                    expandedCards.has(book.id) ? 'lg:max-h-96 lg:opacity-100' : 'lg:max-h-0 lg:opacity-0'
-                  }`}>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                      Published: {book.date_published}
-                    </p>
-                    
-                    <div className="mb-4">
-                      {role === "admin" ? (
-                        <select
-                          value={
-                            book.read ? "read" : 
-                            book.reading ? "reading" : 
-                            book.want_to_read ? "want_to_read" : "not_set"
-                          }
-                          onChange={(e) => handleStatusChange(book.id, e.target.value)}
-                          className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${getBookStatus(book).bgColor} ${getBookStatus(book).textColor}`}
-                        >
-                          <option value="not_set">Not Set</option>
-                          <option value="want_to_read">Want to Read</option>
-                          <option value="reading">Currently Reading</option>
-                          <option value="read">Completed</option>
-                        </select>
-                      ) : (
-                        <span className={`inline-block w-full text-center px-4 py-2 rounded-lg text-sm font-medium ${getBookStatus(book).bgColor} ${getBookStatus(book).textColor}`}>
-                          {getBookStatus(book).text}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Genres Section */}
-                    {book.genres && book.genres.length > 0 && (
-                      <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <h5 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-3">
-                          Genres
-                        </h5>
-                        <div className="flex flex-wrap gap-2">
-                          {book.genres.map((genre, index) => (
-                            <span 
-                              key={`${genre}-${index}`}
-                              className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full font-medium border border-blue-200 dark:border-blue-800"
-                            >
-                              {genre}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                        <option value="not_set">Not Set</option>
+                        <option value="want_to_read">Want to Read</option>
+                        <option value="reading">Currently Reading</option>
+                        <option value="read">Completed</option>
+                      </select>
+                    ) : (
+                      <span className={`inline-block w-full text-center px-4 py-2 rounded-lg text-sm font-medium ${getBookStatus(book).bgColor} ${getBookStatus(book).textColor}`}>
+                        {getBookStatus(book).text}
+                      </span>
                     )}
                   </div>
                 </div>
