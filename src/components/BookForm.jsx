@@ -63,7 +63,7 @@ export default function BookForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
           Add a Book
         </h2>
