@@ -5,6 +5,7 @@ import BookForm from "../components/BookForm";
 import { userRole } from "../hooks/userRoleHook";
 import { getMyBooks, bookStatus } from "../lib/supabase";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Books() {
   const { role } = userRole();
@@ -43,13 +44,11 @@ export default function Books() {
 
   const handleStatusChange = async (bookId, newStatus) => {
     try {
-      // First update the database
       await bookStatus({
         bookId: bookId,
         newStatus: newStatus
       });
 
-      // Then update local state
       setBooks(prevBooks => 
         prevBooks.map(book => {
           if (book.id === bookId) {
@@ -65,7 +64,6 @@ export default function Books() {
       );
     } catch (error) {
       console.error("Error updating book status:", error);
-      // Optionally show user-friendly error message
       alert("Failed to update book status. Please try again.");
     }
   };
@@ -171,6 +169,12 @@ export default function Books() {
                         {getBookStatus(book).text}
                       </span>
                     )}
+                    <Link 
+                      to={`/books/${book.id}`}
+                      className="inline-block w-full text-center mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                      View Book
+                    </Link>
                   </div>
                 </div>
               </li>
