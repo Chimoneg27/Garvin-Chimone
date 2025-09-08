@@ -132,7 +132,7 @@ export default function Navbar() {
           
           {/* Mobile Auth Button */}
           {!user ? (
-            <Link to="/LogIn" onClick={() => setIsOpen(false)}>
+            <Link to="/SignIn" onClick={() => setIsOpen(false)}>
               <button className="bg-black text-white font-bold p-2 rounded-md flex items-center gap-2">
                 Login
               </button>
