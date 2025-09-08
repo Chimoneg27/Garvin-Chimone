@@ -44,20 +44,34 @@ export default function BookForm() {
       reading: form.reading,
     };
 
-    if(!payload.name || !payload.author || payload.genres.length === 0) {
-      setStatus('error')
-      setMsg('Please provide a title, author and at least one genre.')
+    if (!payload.name || !payload.author || payload.genres.length === 0) {
+      setStatus("error");
+      setMsg("Please provide a title, author and at least one genre.");
     }
 
     try {
-      const result = await addBook(payload)
-      console.log('Edge response →', result);
-      setStatus('success')
-      setMsg("Book added successfully!")
-    } catch (err){
-      console.error(err)
-      setStatus('error')
-      setMsg(err.message || 'Something went wrong or you are not allowed to add books')
+      const result = await addBook(payload);
+      console.log("Edge response →", result);
+      setStatus("success");
+      setMsg("Book added successfully!");
+      setForm({
+        name: "",
+        author: "",
+        date_published: "",
+        cover_image_url: "",
+        genres: "",
+        description: "",
+        read: false,
+        reading: false,
+        likes: 0,
+      });
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setMsg(
+        err.message ||
+          "Something went wrong or you are not allowed to add books"
+      );
     }
   };
 
@@ -87,7 +101,7 @@ export default function BookForm() {
               Author*
             </label>
             <input
-              name='author'
+              name="author"
               required
               value={form.author}
               onChange={handleChange}
@@ -113,7 +127,7 @@ export default function BookForm() {
               Cover Image URL
             </label>
             <input
-              name='cover_image_url'
+              name="cover_image_url"
               type="url"
               value={form.cover_image_url}
               onChange={handleChange}
@@ -140,7 +154,7 @@ export default function BookForm() {
           <label className="block text-sm font-medium text-gray-700">
             Description
           </label>
-          <textarea 
+          <textarea
             name="description"
             rows={4}
             value={form.description}
@@ -151,11 +165,13 @@ export default function BookForm() {
 
         {/* ---Boolean flags--- */}
         <fieldset className="border border-gray-200 rounded-lg p-4 space-y-4">
-          <legend className="text-lg font-medium text-gray-900 px-2">Reading Status</legend>
-          
+          <legend className="text-lg font-medium text-gray-900 px-2">
+            Reading Status
+          </legend>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <label className="flex items-center space-x-3 cursor-pointer">
-              <input 
+              <input
                 type="checkbox"
                 name="read"
                 checked={form.read}
@@ -173,39 +189,43 @@ export default function BookForm() {
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
               />
-              <span className="text-sm font-medium text-gray-700">Want to read</span>
+              <span className="text-sm font-medium text-gray-700">
+                Want to read
+              </span>
             </label>
 
             <label className="flex items-center space-x-3 cursor-pointer">
               <input
-                type='checkbox'
+                type="checkbox"
                 name="reading"
                 checked={form.reading}
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
               />
-              <span className="text-sm font-medium text-gray-700">Currently reading</span>
+              <span className="text-sm font-medium text-gray-700">
+                Currently reading
+              </span>
             </label>
           </div>
         </fieldset>
 
         <div className="pt-4">
-          <button 
-            type="submit" 
-            disabled={status === 'loading'}
+          <button
+            type="submit"
+            disabled={status === "loading"}
             className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            {status === 'loading' ? 'Saving...' : 'Add Book'}
+            {status === "loading" ? "Saving..." : "Add Book"}
           </button>
         </div>
 
-        {status === 'success' && (
+        {status === "success" && (
           <div className="p-4 bg-green-50 border border-green-200 rounded-md">
             <p className="text-green-800 text-sm font-medium">{msg}</p>
           </div>
         )}
-        
-        {status === 'error' && (
+
+        {status === "error" && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-md">
             <p className="text-red-800 text-sm font-medium">{msg}</p>
           </div>
