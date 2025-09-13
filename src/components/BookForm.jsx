@@ -11,7 +11,7 @@ export default function BookForm() {
     description: "",
     read: false,
     reading: false,
-    likes: 0,
+    want_to_read: false,
   });
   const [status, setStatus] = useState("idle");
   const [msg, setMsg] = useState("");
@@ -63,7 +63,7 @@ export default function BookForm() {
         description: "",
         read: false,
         reading: false,
-        likes: 0,
+        want_to_read: false
       });
     } catch (err) {
       console.error(err);
