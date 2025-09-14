@@ -1,11 +1,12 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import MovieShowForm from "../components/MovieForm";
+import MovieShowForm from "../components/MovieShowFrom";
 import { userRole } from "../hooks/userRoleHook";
 // import { userRole } from "../hooks/userRoleHook"
 import { useState, useEffect } from "react";
 import { getMovieShows } from "../lib/supabase";
 import { useTheme } from "../components/ThemeContext";
+import { Link } from "react-router-dom";
 
 export default function MoviesTV() {
   const { role } = userRole();
@@ -87,7 +88,57 @@ export default function MoviesTV() {
           </h2>
 
           {moviesShows.length > 0 ? (
-            <ul></ul>
+            <ul className="p-6 w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {moviesShows.map((movieShow) => (
+                <li
+                  key={movieShow.id}
+                  className="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transform hover:-translate-y-1"
+                >
+                  <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700">
+                    <img
+                      src={`${movieShow.poster_url}`}
+                      alt={`Cover of ${movieShow.name}`}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 leading-tight">
+                      {movieShow.name}
+                    </h3>
+                    <p className="text-base text-gray-600 dark:text-gray-300 font-medium mb-2">
+                      Directed by {movieShow.director}
+                    </p>
+                  </div>
+
+                  <div className="mb-4">
+                    {role === "admin" ? (
+                      <select
+                       value={
+                        movieShow.watched ? "watched" :
+                        movieShow.want_to_watch ? "want_to_watch" :
+                        movieShow.watching ? "watching" : "not_set"
+                       }
+                      //  onChange={(e) => handleStatusChange(movieShow.id, e.target.value)}
+                      //  className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${getBookStatus(movieShow).bgColor} ${getBookStatus(movieShow).textColor}`}
+                      >
+                        <option value="not_set">Not Set</option>
+                        <option value="want_to_watch">Want to Watch</option>
+                        <option value="watching">Watching</option>
+                        <option value="watched">Completed</option>
+                      </select>
+                    ) : (
+                      <span></span>
+                    )}
+                    <Link
+                      to={`/`}
+                      className="inline-block w-full text-center mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                      View More
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
           ) : (
             <div className="text-center py-16">
               <div className="text-gray-400 dark:textgray-500 mb-4">
