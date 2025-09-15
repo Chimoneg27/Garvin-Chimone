@@ -110,30 +110,28 @@ export default function MoviesTV() {
                     </p>
                   </div>
 
-                  <div className="mb-4">
-                    {role === "admin" ? (
+                  <div className="p-4">
+                    {role === "admin" && (
                       <select
                        value={
                         movieShow.watched ? "watched" :
                         movieShow.want_to_watch ? "want_to_watch" :
                         movieShow.watching ? "watching" : "not_set"
                        }
-                      //  onChange={(e) => handleStatusChange(movieShow.id, e.target.value)}
-                      //  className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${getBookStatus(movieShow).bgColor} ${getBookStatus(movieShow).textColor}`}
+                       disabled
+                       className="w-full px-4 py-2 mb-3 rounded-lg text-sm font-medium border-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed"
                       >
-                        <option value="not_set">Not Set</option>
-                        <option value="want_to_watch">Want to Watch</option>
-                        <option value="watching">Watching</option>
-                        <option value="watched">Completed</option>
+                        <option value="not_set">Status: Not Set</option>
+                        <option value="want_to_watch">Status: Want to Watch</option>
+                        <option value="watching">Status: Watching</option>
+                        <option value="watched">Status: Completed</option>
                       </select>
-                    ) : (
-                      <span></span>
                     )}
                     <Link
-                      to={`/`}
-                      className="inline-block w-full text-center mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      to={`/Movies&TV`}
+                      className="inline-block w-full text-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
-                      View More
+                      View Details
                     </Link>
                   </div>
                 </li>
@@ -154,7 +152,7 @@ export default function MoviesTV() {
                 No Movies or Shows Yet
               </h3>
               <p className="text-lg text-gray-500 dark:text-gray-400">
-                Your book collection is waiting to be filled
+                Log in to see my movies and shows
               </p>
             </div>
           )}
