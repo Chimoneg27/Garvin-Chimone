@@ -2,9 +2,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieShowForm from "../components/MovieShowFrom";
 import { userRole } from "../hooks/userRoleHook";
-// import { userRole } from "../hooks/userRoleHook"
 import { useState, useEffect } from "react";
-import { getMovieShows } from "../lib/supabase";
+import { getMovieShows, movieShowStatus } from "../lib/supabase";
 import { useTheme } from "../components/ThemeContext";
 import { Link } from "react-router-dom";
 
@@ -32,6 +31,60 @@ export default function MoviesTV() {
 
     fetchBooks();
   }, []);
+
+  const handleStatusChange = async (movieShowId, newStatus) => {
+    try {
+      await movieShowStatus({
+        movieShowId: movieShowId,
+        newStatus: newStatus,
+      });
+
+      setMoviesShows((prevMoviesShows) =>
+        prevMoviesShows.map((movieShow) => {
+          if (movieShow.id === movieShowId) {
+            return {
+              ...movieShow,
+              watched: newStatus === "watched",
+              watching: newStatus === "watching",
+              want_to_watch: newStatus === "want_to_watch",
+            };
+          }
+          return movieShow;
+        })
+      );
+    } catch (error) {
+      console.error("Error updating movie|show status:", error);
+      alert("Failed to update movie|show status. Try again");
+    }
+  };
+
+  const getMovieShowStatus = (movieShow) => {
+    if (movieShow.watched) {
+      return {
+        text: "Completed",
+        bgColor: "bg-green-100 dark:bg-green-900",
+        textColor: "text-green-800 dark:text-green-200",
+      };
+    } else if (movieShow.watching) {
+      return {
+        text: "Currently Watching",
+        bgColor: "bg-yellow-100 dark:bg-yellow-900",
+        textColor: "text-yellow-800 dark:text-yellow-200",
+      };
+    } else if (movieShow.want_to_watch) {
+      return {
+        text: "Want to Watch",
+        bgColor: "bg-blue-100 dark:bg-blue-900",
+        textColor: "text-blue-800 dark:text-blue-200",
+      };
+    } else {
+      return {
+        text: "Not Set",
+        bgColor: "bg-gray-100 dark:bg-gray-700",
+        textColor: "text-gray-600 dark:text-gray-400",
+      };
+    }
+  };
 
   if (loading)
     return (
@@ -108,31 +161,45 @@ export default function MoviesTV() {
                     <p className="text-base text-gray-600 dark:text-gray-300 font-medium mb-2">
                       Directed by {movieShow.director}
                     </p>
-                  </div>
 
-                  <div className="p-4">
-                    {role === "admin" && (
-                      <select
-                       value={
-                        movieShow.watched ? "watched" :
-                        movieShow.want_to_watch ? "want_to_watch" :
-                        movieShow.watching ? "watching" : "not_set"
-                       }
-                       disabled
-                       className="w-full px-4 py-2 mb-3 rounded-lg text-sm font-medium border-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-not-allowed"
+                    <div className="mb-4">
+                      {role === "admin" ? (
+                        <select
+                          value={
+                            movieShow.watched
+                              ? "watched"
+                              : movieShow.want_to_watch
+                              ? "want_to_watch"
+                              : movieShow.watching
+                              ? "watching"
+                              : "not_set"
+                          }
+                          onChange={(e) => handleStatusChange(movieShow.id, e.target.value)}
+                          className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${
+                            getMovieShowStatus(movieShow).bgColor
+                          } ${getMovieShowStatus(movieShow).textColor}`}
+                        >
+                          <option value="not_set">Not Set</option>
+                          <option value="want_to_watch">Want to Watch</option>
+                          <option value="watching">Currently Watching</option>
+                          <option value="watched">Completed</option>
+                        </select>
+                      ) : (
+                        <span
+                          className={`inline-block w-full text-center px-4 py-2 rounded-lg text-sm font-medium ${
+                            getMovieShowStatus(movieShow).bgColor
+                          } ${getMovieShowStatus(movieShow).textColor}`}
+                        >
+                          {getMovieShowStatus(movieShow).text}
+                        </span>
+                      )}
+                      <Link
+                        to={`/movies/${movieShow.id}`}
+                        className="inline-block w-full text-center mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       >
-                        <option value="not_set">Status: Not Set</option>
-                        <option value="want_to_watch">Status: Want to Watch</option>
-                        <option value="watching">Status: Watching</option>
-                        <option value="watched">Status: Completed</option>
-                      </select>
-                    )}
-                    <Link
-                      to={`/Movies&TV`}
-                      className="inline-block w-full text-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                      View Details
-                    </Link>
+                        View Details
+                      </Link>
+                    </div>
                   </div>
                 </li>
               ))}
