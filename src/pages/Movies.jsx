@@ -15,21 +15,21 @@ export default function MoviesTV() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchMoviesShows = async () => {
       try {
         setLoading(true);
         const moviesShowsData = await getMovieShows();
         setMoviesShows(moviesShowsData);
         console.log(moviesShowsData);
       } catch (err) {
-        console.error("Error fetchign books:", err);
+        console.error("Error fetchign movies and shows:", err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBooks();
+    fetchMoviesShows();
   }, []);
 
   const handleStatusChange = async (movieShowId, newStatus) => {
@@ -194,7 +194,7 @@ export default function MoviesTV() {
                         </span>
                       )}
                       <Link
-                        to={`/movies/${movieShow.id}`}
+                        to={`/Movies&TV/${movieShow.id}`}
                         className="inline-block w-full text-center mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       >
                         View Details
