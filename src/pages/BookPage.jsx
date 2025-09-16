@@ -112,7 +112,7 @@ export default function BooksPage() {
             <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4">Book Not Found</h1>
             <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">The book you&apos;re looking for doesn&apos;t exist.</p>
             <Link 
-              to="/books"
+              to="/Books"
               className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
             >
               Back to Books

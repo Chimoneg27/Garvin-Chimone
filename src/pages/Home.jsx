@@ -19,7 +19,7 @@ const Home = () => {
             { id: "dev", label: "Dev", to: "/Dev" },
             { id: "music", label: "Music", to: "/MusicLibrary" },
             { id: "books", label: "Books", to: "/Books" },
-            { id: "movies", label: "Movies & Series", to: "/Movies&TV" },
+            { id: "movies", label: "Movies & Shows", to: "/Movies&TV" },
             { id: "projects", label: "Projects", to: "/Projects" },
           ].map(({ id, label, to }) => (
             <li
