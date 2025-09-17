@@ -8,6 +8,7 @@ export default function MovieShowForm() {
     director: "",
     genres: "",
     poster_url: "",
+    banner_url: "",
     description: "",
     year_released_date: "",
     watching: false,
@@ -44,6 +45,7 @@ export default function MovieShowForm() {
         ? new Date(form.year_released_date).toISOString()
         : undefined,
       poster_url: form.poster_url?.trim() || undefined,
+      banner_url: form.banner_url?.trim() || undefined,
       description: form.description?.trim() || undefined,
       watched: form.watched,
       watching: form.watching,
@@ -67,6 +69,7 @@ export default function MovieShowForm() {
         starring: "",
         year_released_date: "",
         poster_url: "",
+        banner_url: "",
         description: "",
         watched: false,
         watching: false,
@@ -125,6 +128,7 @@ export default function MovieShowForm() {
               value={form.year_released_date}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+
             />
           </div>
 
@@ -136,6 +140,18 @@ export default function MovieShowForm() {
               name="poster_url"
               type="url"
               value={form.poster_url}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Banner URL
+            </label>
+            <input
+              name="banner_url"
+              type="url"
+              value={form.banner_url}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             />
@@ -234,7 +250,7 @@ export default function MovieShowForm() {
             disabled={status === "loading"}
             className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            {status === "loading" ? "Saving..." : "Add Book"}
+            {status === "loading" ? "Saving..." : "Add Movie/Show"}
           </button>
         </div>
 

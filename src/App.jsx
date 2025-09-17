@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import SignIn from "./auth/SignIn";
 import BooksPage from "./pages/BookPage";
 import Projects from "./pages/Projects";
+import MoviesPage from "./pages/MoviesPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Dev" element={<Dev />} />
         <Route path="/MusicLibrary" element={<Music />} />
         <Route path="/Movies&TV" element={<MoviesTV />} />
+        <Route path="/Movies&TV/:id" element={<MoviesPage />} />
         <Route path="/Books" element={<Books />} />
         <Route path="/Projects" element={<Projects />} />
         <Route path='/Books/:id' element={<BooksPage />}/>
