@@ -128,7 +128,7 @@ export default function MovieShowForm() {
               value={form.year_released_date}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              
+
             />
           </div>
 
@@ -146,7 +146,7 @@ export default function MovieShowForm() {
           </div>
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
-              Cover Image URL
+              Banner URL
             </label>
             <input
               name="banner_url"
