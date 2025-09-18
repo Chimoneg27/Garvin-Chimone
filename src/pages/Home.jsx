@@ -21,6 +21,8 @@ const Home = () => {
             { id: "books", label: "Books", to: "/Books" },
             { id: "movies", label: "Movies & Shows", to: "/Movies&TV" },
             { id: "projects", label: "Projects", to: "/Projects" },
+            { id: "Blog", label: "Blog", to: "/Blog" },
+            
           ].map(({ id, label, to }) => (
             <li
               key={id}
