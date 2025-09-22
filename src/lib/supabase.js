@@ -79,7 +79,7 @@ export async function favBook(payload) {
     throw new Error("No active session")
   }
 
-  const { data, error } = await supabase.function.invoke("favorite-book", {
+  const { data, error } = await supabase.functions.invoke("favorite-book", {
     body: payload,
     headers: {
       Authorization: `Bearer ${session.access_token}`
