@@ -64,6 +64,20 @@ export const getMyBooks = async (page = 1, limit = 20) => {
   return { data, count };
 };
 
+export const getBookById = async (id) => {
+  const { data, error } = await supabase
+    .from("books")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
 export async function addMovieShow(payload) {
   const {
     data: { session },

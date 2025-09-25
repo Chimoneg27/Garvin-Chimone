@@ -1,4 +1,4 @@
-import { getMyBooks, favBook } from "../lib/supabase";
+import { getBookById, favBook } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -7,7 +7,7 @@ import { useTheme } from "../components/ThemeContext";
 import { userRole } from "../hooks/userRoleHook";
 
 export default function BooksPage() {
-  const [books, setBooks] = useState([]);
+  const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
@@ -66,13 +66,10 @@ export default function BooksPage() {
         newFavorite: newFavorite,
       });
 
-      setBooks((prevBooks) =>
-        prevBooks.map((book) =>
-          book.id === bookId
-            ? { ...book, favorite_book: newFavorite === "favorite" }
-            : book
-        )
-      );
+      setBook((prevBook) => ({
+        ...prevBook,
+        favorite_book: newFavorite === "favorite"
+      }));
     } catch (error) {
       console.error("Error making the book your favorite:", error);
       alert("Failed to update favorite book, try again");
@@ -80,22 +77,21 @@ export default function BooksPage() {
   };
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchBook = async () => {
       try {
         setLoading(true);
-        const { data } = await getMyBooks();
-        setBooks(data);
-        console.log(data);
+        const data = await getBookById(id);
+        setBook(data);
       } catch (err) {
-        console.error("Error fetching books:", err);
+        console.error("Error fetching book:", err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBooks();
-  }, []);
+    fetchBook();
+  }, [id]);
 
   if (loading)
     return (
@@ -133,8 +129,6 @@ export default function BooksPage() {
         </div>
       </div>
     );
-
-  const book = books.find((b) => b.id === id);
 
   if (!book && !loading) {
     return (
