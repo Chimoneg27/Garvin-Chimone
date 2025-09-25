@@ -42,16 +42,21 @@ export async function bookStatus(payload) {
   return data
 }
 
-export const getMyBooks = async () => {
-  const { data, error } = await supabase
+export const getMyBooks = async (page = 1, limit = 20) => {
+  const from = (page - 1) * limit
+  const to = from + limit - 1
+
+  const { data, error, count } = await supabase
     .from('books')
-    .select("*")
+    .select("*", { count: "exact" })
+    .order('name')
+    .range(from, to)
 
   if(error) {
     throw error
   }
 
-  return data
+  return {data, count}
 }
 
 export async function addMovieShow(payload) {
