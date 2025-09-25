@@ -83,9 +83,9 @@ export default function BooksPage() {
     const fetchBooks = async () => {
       try {
         setLoading(true);
-        const booksData = await getMyBooks();
-        setBooks(booksData);
-        console.log(booksData);
+        const { data } = await getMyBooks();
+        setBooks(data);
+        console.log(data);
       } catch (err) {
         console.error("Error fetching books:", err);
         setError(err.message);
