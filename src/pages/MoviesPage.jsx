@@ -45,9 +45,9 @@ export default function MoviesPage() {
     const fetchMoviesShows = async () => {
       try {
         setLoading(true);
-        const moviesShowsData = await getMovieShows();
-        setMoviesShows(moviesShowsData);
-        console.log(moviesShowsData);
+        const {data} = await getMovieShows();
+        setMoviesShows(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching movies and shows");
         setError(error.message);

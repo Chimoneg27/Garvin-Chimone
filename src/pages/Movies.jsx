@@ -13,14 +13,18 @@ export default function MoviesTV() {
   const [moviesShows, setMoviesShows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1)
+  const [limit] = useState(20)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     const fetchMoviesShows = async () => {
       try {
         setLoading(true);
-        const moviesShowsData = await getMovieShows();
-        setMoviesShows(moviesShowsData);
-        console.log(moviesShowsData);
+        const {data, count} = await getMovieShows(page, limit);
+        setMoviesShows(data);
+        setTotalPages(Math.ceil(count / limit))
+        console.log(data);
       } catch (err) {
         console.error("Error fetchign movies and shows:", err);
         setError(err.message);
@@ -30,7 +34,7 @@ export default function MoviesTV() {
     };
 
     fetchMoviesShows();
-  }, []);
+  }, [page, limit]);
 
   const handleStatusChange = async (movieShowId, newStatus) => {
     try {
@@ -223,6 +227,27 @@ export default function MoviesTV() {
               </p>
             </div>
           )}
+        </div>
+                <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={page === 1}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
+          >
+            Previous
+          </button>
+
+          <span className="text-gray-600 dark:text-gray-300 font-medium">
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+            disabled={page === totalPages}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
+          >
+            Next
+          </button>
         </div>
       </div>
       <Footer />
