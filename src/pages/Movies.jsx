@@ -13,14 +13,18 @@ export default function MoviesTV() {
   const [moviesShows, setMoviesShows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(20);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchMoviesShows = async () => {
       try {
         setLoading(true);
-        const moviesShowsData = await getMovieShows();
-        setMoviesShows(moviesShowsData);
-        console.log(moviesShowsData);
+        const { data, count } = await getMovieShows(page, limit);
+        setMoviesShows(data);
+        setTotalPages(Math.ceil(count / limit));
+        console.log(data);
       } catch (err) {
         console.error("Error fetchign movies and shows:", err);
         setError(err.message);
@@ -30,7 +34,7 @@ export default function MoviesTV() {
     };
 
     fetchMoviesShows();
-  }, []);
+  }, [page, limit]);
 
   const handleStatusChange = async (movieShowId, newStatus) => {
     try {
@@ -147,6 +151,23 @@ export default function MoviesTV() {
                   key={movieShow.id}
                   className="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transform hover:-translate-y-1"
                 >
+                  {movieShow.favorite === true ? (
+                    <button
+                      className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md z-10"
+                      style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+                      aria-label="Favorite Book"
+                    >
+                      <svg
+                        className="text-red-400 w-4 h-4 fill-current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M0 190.9V185.1C0 115.2 50.52 55.58 119.4 44.1C164.1 36.51 211.4 51.37 244 84.02L256 96L267.1 84.02C300.6 51.37 347 36.51 392.6 44.1C461.5 55.58 512 115.2 512 185.1V190.9C512 232.4 494.8 272.1 464.4 300.4L283.7 469.1C276.2 476.1 266.3 480 256 480C245.7 480 235.8 476.1 228.3 469.1L47.59 300.4C17.23 272.1 .0003 232.4 .0003 190.9L0 190.9z" />
+                      </svg>
+                    </button>
+                  ) : (
+                    ""
+                  )}
                   <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700">
                     <img
                       src={`${movieShow.poster_url}`}
@@ -174,7 +195,9 @@ export default function MoviesTV() {
                               ? "watching"
                               : "not_set"
                           }
-                          onChange={(e) => handleStatusChange(movieShow.id, e.target.value)}
+                          onChange={(e) =>
+                            handleStatusChange(movieShow.id, e.target.value)
+                          }
                           className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${
                             getMovieShowStatus(movieShow).bgColor
                           } ${getMovieShowStatus(movieShow).textColor}`}
@@ -223,6 +246,27 @@ export default function MoviesTV() {
               </p>
             </div>
           )}
+        </div>
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={page === 1}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
+          >
+            Previous
+          </button>
+
+          <span className="text-gray-600 dark:text-gray-300 font-medium">
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+            disabled={page === totalPages}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
+          >
+            Next
+          </button>
         </div>
       </div>
       <Footer />

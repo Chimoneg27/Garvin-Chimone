@@ -10,6 +10,7 @@ import SignIn from "./auth/SignIn";
 import BooksPage from "./pages/BookPage";
 import Projects from "./pages/Projects";
 import MoviesPage from "./pages/MoviesPage";
+import Blog from "./pages/Blog";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Movies&TV/:id" element={<MoviesPage />} />
         <Route path="/Books" element={<Books />} />
         <Route path="/Projects" element={<Projects />} />
+        <Route path="/Blog" element={<Blog />} />
         <Route path='/Books/:id' element={<BooksPage />}/>
         <Route path="/SignUp" element={<Signup />} />
         <Route path="/SignIn" element={<SignIn />} />

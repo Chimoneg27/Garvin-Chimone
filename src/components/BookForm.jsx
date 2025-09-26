@@ -12,6 +12,7 @@ export default function BookForm() {
     read: false,
     reading: false,
     want_to_read: false,
+    favorite_book: false,
   });
   const [status, setStatus] = useState("idle");
   const [msg, setMsg] = useState("");
@@ -42,6 +43,7 @@ export default function BookForm() {
       read: form.read,
       want_to_read: form.want_to_read,
       reading: form.reading,
+      favorite_book: form.favorite_book
     };
 
     if (!payload.name || !payload.author || payload.genres.length === 0) {
@@ -63,7 +65,8 @@ export default function BookForm() {
         description: "",
         read: false,
         reading: false,
-        want_to_read: false
+        want_to_read: false,
+        favorite_book: false,
       });
     } catch (err) {
       console.error(err);
@@ -205,6 +208,25 @@ export default function BookForm() {
               <span className="text-sm font-medium text-gray-700">
                 Currently reading
               </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset className="border border-gray-200 rounded-lg p-4 space-y-4">
+          <legend className="text-lg font-medium text-gray-900 px-2">
+            Favorite
+          </legend>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <label className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                name="favorite"
+                checked={form.favorite_book}
+                onChange={handleChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Make Favorite</span>
             </label>
           </div>
         </fieldset>

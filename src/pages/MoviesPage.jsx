@@ -1,4 +1,4 @@
-import { getMovieShows } from "../lib/supabase";
+import { getMovieShowById } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -45,9 +45,9 @@ export default function MoviesPage() {
     const fetchMoviesShows = async () => {
       try {
         setLoading(true);
-        const moviesShowsData = await getMovieShows();
-        setMoviesShows(moviesShowsData);
-        console.log(moviesShowsData);
+        const data = await getMovieShowById(id);
+        setMoviesShows(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching movies and shows");
         setError(error.message);
@@ -57,7 +57,7 @@ export default function MoviesPage() {
     };
 
     fetchMoviesShows();
-  }, []);
+  }, [id]);
 
   if (loading)
     return (
@@ -94,9 +94,7 @@ export default function MoviesPage() {
       </div>
     );
 
-  const movieShow = moviesShows.find((ms) => ms.id == id);
-
-  if (!movieShow && !loading) {
+  if (!moviesShows && !loading) {
     return (
       <div className="w-full min-h-screen bg-gray-50 dark:bg-gray-900">
         <Navbar />
@@ -157,13 +155,13 @@ export default function MoviesPage() {
             </Link>
           </div>
 
-          {movieShow && (
+          {moviesShows && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               <div className="lg:block hidden col-span-full">
                 <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
                   <img
-                    src={movieShow.banner_url}
-                    alt={`cover of ${movieShow.name}`}
+                    src={moviesShows.banner_url}
+                    alt={`cover of ${moviesShows.name}`}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -172,18 +170,18 @@ export default function MoviesPage() {
                 <div className="sticky top-8">
                   <div className="aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl overflow-hidden shadow-2xl">
                     <img
-                      src={movieShow.poster_url}
-                      alt={`cover of ${movieShow.name}`}
+                      src={moviesShows.poster_url}
+                      alt={`cover of ${moviesShows.name}`}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="mt-6">
                     <span
                       className={`inline-block w-full text-center px-4 py-3 rounded-xl text-sm font-medium ${
-                        getMovieShowStatus(movieShow).bgColor
-                      } ${getMovieShowStatus(movieShow).textColor}`}
+                        getMovieShowStatus(moviesShows).bgColor
+                      } ${getMovieShowStatus(moviesShows).textColor}`}
                     >
-                      {getMovieShowStatus(movieShow).text}
+                      {getMovieShowStatus(moviesShows).text}
                     </span>
                   </div>
                 </div>
@@ -196,21 +194,21 @@ export default function MoviesPage() {
                       className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
                       style={{ color: color }}
                     >
-                      {movieShow.name}
+                      {moviesShows.name}
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-medium">
-                      Directed by {movieShow.director}
+                      Directed by {moviesShows.director}
                     </p>
                   </div>
 
-                  {movieShow.year_released_date && (
+                  {moviesShows.year_released_date && (
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 max-w-sm">
                       <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                         Release Date
                       </h3>
                       <p className="text-lg font-medium text-gray-900 dark:text-white">
                         {new Date(
-                          movieShow.year_released_date
+                          moviesShows.year_released_date
                         ).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "long",
@@ -220,13 +218,13 @@ export default function MoviesPage() {
                     </div>
                   )}
 
-                  {movieShow.genres && (
+                  {moviesShows.genres && (
                     <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                         Genres
                       </h3>
                       <div className="flex flex-wrap gap-3">
-                        {movieShow.genres.map((genre, index) => (
+                        {moviesShows.genres.map((genre, index) => (
                           <span
                             key={index}
                             className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-600"
@@ -238,13 +236,13 @@ export default function MoviesPage() {
                     </div>
                   )}
 
-                  {movieShow.starring && (
+                  {moviesShows.starring && (
                     <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                         Starring
                       </h3>
                       <div className="flex flex-wrap gap-3">
-                        {movieShow.starring.map((genre, index) => (
+                        {moviesShows.starring.map((genre, index) => (
                           <span
                             key={index}
                             className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-600 text-white"
@@ -256,13 +254,13 @@ export default function MoviesPage() {
                     </div>
                   )}
 
-                  {movieShow.description && (
+                  {moviesShows.description && (
                     <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                         Description
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-                        {movieShow.description}
+                        {moviesShows.description}
                       </p>
                     </div>
                   )}

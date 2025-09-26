@@ -1,15 +1,17 @@
-import { getMyBooks } from "../lib/supabase";
+import { getBookById, favBook } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
+import { userRole } from "../hooks/userRoleHook";
 
 export default function BooksPage() {
-  const [books, setBooks] = useState([]);
+  const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
+  const { role } = userRole();
 
   const { id } = useParams();
 
@@ -18,46 +20,78 @@ export default function BooksPage() {
       return {
         text: "Completed",
         bgColor: "bg-green-100 dark:bg-green-900",
-        textColor: "text-green-800 dark:text-green-200"
+        textColor: "text-green-800 dark:text-green-200",
       };
     } else if (book.reading) {
       return {
         text: "Currently Reading",
         bgColor: "bg-yellow-100 dark:bg-yellow-900",
-        textColor: "text-yellow-800 dark:text-yellow-200"
+        textColor: "text-yellow-800 dark:text-yellow-200",
       };
     } else if (book.want_to_read) {
       return {
         text: "Want to Read",
         bgColor: "bg-blue-100 dark:bg-blue-900",
-        textColor: "text-blue-800 dark:text-blue-200"
+        textColor: "text-blue-800 dark:text-blue-200",
       };
     } else {
       return {
         text: "Not Set",
         bgColor: "bg-gray-100 dark:bg-gray-700",
-        textColor: "text-gray-600 dark:text-gray-400"
+        textColor: "text-gray-600 dark:text-gray-400",
       };
     }
   };
 
+  const getFavBook = (book) => {
+    if (book.favorite_book === true) {
+      return {
+        text: "Favorite",
+        bgColor: "bg-red-500 dark:bg-red-900",
+        textColor: "text-white font-bold",
+      };
+    } else {
+      return {
+        text: "Not Set",
+        bgColor: "bg-gray-100 dark:bg-gray-700",
+        textColor: "text-gray-600 dark:text-gray-400",
+      };
+    }
+  };
+
+  const makeFavorite = async (bookId, newFavorite) => {
+    try {
+      await favBook({
+        bookId: bookId,
+        newFavorite: newFavorite,
+      });
+
+      setBook((prevBook) => ({
+        ...prevBook,
+        favorite_book: newFavorite === "favorite"
+      }));
+    } catch (error) {
+      console.error("Error making the book your favorite:", error);
+      alert("Failed to update favorite book, try again");
+    }
+  };
+
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchBook = async () => {
       try {
         setLoading(true);
-        const booksData = await getMyBooks();
-        setBooks(booksData);
-        console.log(booksData);
+        const data = await getBookById(id);
+        setBook(data);
       } catch (err) {
-        console.error("Error fetching books:", err);
+        console.error("Error fetching book:", err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBooks();
-  }, []);
+    fetchBook();
+  }, [id]);
 
   if (loading)
     return (
@@ -95,8 +129,6 @@ export default function BooksPage() {
         </div>
       </div>
     );
-  
-  const book = books.find(b => b.id === id);
 
   if (!book && !loading) {
     return (
@@ -105,13 +137,21 @@ export default function BooksPage() {
         <div className="pt-24 pb-12 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-gray-400 dark:text-gray-500 mb-4">
-              <svg className="w-24 h-24 mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+              <svg
+                className="w-24 h-24 mx-auto"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4">Book Not Found</h1>
-            <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">The book you&apos;re looking for doesn&apos;t exist.</p>
-            <Link 
+            <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4">
+              Book Not Found
+            </h1>
+            <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
+              The book you&apos;re looking for doesn&apos;t exist.
+            </p>
+            <Link
               to="/Books"
               className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
             >
@@ -127,17 +167,27 @@ export default function BooksPage() {
   return (
     <div className="w-full min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
-      
+
       <div className="pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Back Button */}
           <div className="mb-8">
-            <Link 
+            <Link
               to="/books"
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
             >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Books
             </Link>
@@ -148,7 +198,7 @@ export default function BooksPage() {
               <div className="lg:col-span-1">
                 <div className="sticky top-8">
                   <div className="aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl overflow-hidden shadow-2xl">
-                    <img 
+                    <img
                       src={book.cover_image_url}
                       alt={`Cover of ${book.name}`}
                       className="w-full h-full object-cover"
@@ -156,17 +206,44 @@ export default function BooksPage() {
                   </div>
 
                   <div className="mt-6">
-                    <span className={`inline-block w-full text-center px-4 py-3 rounded-xl text-sm font-medium ${getBookStatus(book).bgColor} ${getBookStatus(book).textColor}`}>
+                    <span
+                      className={`inline-block w-full text-center px-4 py-3 rounded-xl text-sm font-medium ${
+                        getBookStatus(book).bgColor
+                      } ${getBookStatus(book).textColor}`}
+                    >
                       {getBookStatus(book).text}
                     </span>
                   </div>
+                  <div className="mt-6">
+                    {role === "admin" ? (
+                      <select
+                        value={book.favorite_book ? "favorite" : "not_set"}
+                        onChange={(e) => makeFavorite(book.id, e.target.value)}
+                        className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${
+                          getFavBook(book).bgColor
+                        } ${getFavBook(book).textColor}`}
+                      >
+                        <option value="favorite">Favorite</option>
+                        <option value="not_set"></option>
+                      </select>
+                    ) : book.favorite_book === true ? (
+                      <p
+                        className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 text-center ${
+                          getFavBook(book).bgColor
+                        } ${getFavBook(book).textColor} `}
+                      >
+                        Favorite
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
               </div>
-
               <div className="lg:col-span-2">
                 <div className="space-y-8">
                   <div>
-                    <h1 
+                    <h1
                       className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
                       style={{ color: color }}
                     >
@@ -183,11 +260,14 @@ export default function BooksPage() {
                         Publication Date
                       </h3>
                       <p className="text-lg font-medium text-gray-900 dark:text-white">
-                        {new Date(book.date_published).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
+                        {new Date(book.date_published).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}
                       </p>
                     </div>
                   )}
@@ -226,7 +306,7 @@ export default function BooksPage() {
           )}
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

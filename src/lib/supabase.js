@@ -25,13 +25,121 @@ export async function addBook(payload) {
 }
 
 export async function bookStatus(payload) {
-  const { data: {session} } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.access_token) {
+    throw new Error("No active session");
+  }
+
+  const { data, error } = await supabase.functions.invoke(
+    "update-book-status",
+    {
+      body: payload,
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
+    }
+  );
+
+  if (error) throw error;
+  return data;
+}
+
+export const getMyBooks = async (page = 1, limit = 20) => {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("books")
+    .select("*", { count: "exact" })
+    .order("name")
+    .range(from, to);
+
+  if (error) {
+    throw error;
+  }
+
+  return { data, count };
+};
+
+export const getBookById = async (id) => {
+  const { data, error } = await supabase
+    .from("books")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const getMovieShowById = async (id) => {
+  const { data, error } = await supabase
+    .from("movies_shows")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return data
+}
+
+export async function addMovieShow(payload) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.access_token) {
+    throw new Error("No active session");
+  }
+
+  const { data, error } = await supabase.functions.invoke("add-movie-show", {
+    body: payload,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+    },
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function favBook(payload) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.access_token) {
+    throw new Error("No active session");
+  }
+
+  const { data, error } = await supabase.functions.invoke("favorite-book", {
+    body: payload,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+    },
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function favMovieShow(payload) {
+  const { data: { session } } = await supabase.auth.getSession()
 
   if (!session?.access_token) {
     throw new Error("No active session")
   }
 
-  const { data, error } = await supabase.functions.invoke('update-book-status', {
+  const { data, error } = await supabase.functions.invoke("movie-show-favorite", {
     body: payload,
     headers: {
       Authorization: `Bearer ${session.access_token}`
@@ -42,60 +150,42 @@ export async function bookStatus(payload) {
   return data
 }
 
-export const getMyBooks = async () => {
-  const { data, error } = await supabase
-    .from('books')
-    .select("*")
-
-  if(error) {
-    throw error
-  }
-
-  return data
-}
-
-export async function addMovieShow(payload) {
-  const { data: { session }, } = await supabase.auth.getSession()
+export async function movieShowStatus(payload) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session?.access_token) {
-    throw new Error("No active session")
+    throw new Error("No active session");
   }
 
-  const { data, error } = await supabase.functions.invoke("add-movie-show", {
-    body: payload,
-    headers: {
-      Authorization: `Bearer ${session.access_token}`
+  const { data, error } = await supabase.functions.invoke(
+    "update-movie-show-status",
+    {
+      body: payload,
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
     }
-  })
+  );
 
-  if(error) throw error
-  return data
+  if (error) throw error;
+  return data;
 }
 
-export async function movieShowStatus(payload) {
-  const { data: {session} } = await supabase.auth.getSession()
+export async function getMovieShows(page = 1, limit = 20) {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1
 
-  if(!session?.access_token) {
-    throw new Error("No active session")
-  }
-
-  const { data, error } = await supabase.functions.invoke("update-movie-show-status", {
-    body: payload,
-    headers: {
-      Authorization: `Bearer ${session.access_token}`
-    }
-  })
-
-  if(error) throw error
-  return data
-}
-
-export async function getMovieShows() {
-  const { data, error } = await supabase.from("movies_shows").select("*")
+  const { data, error, count } = await supabase
+    .from("movies_shows")
+    .select("*", { count: "exact" })
+    .order("name")
+    .range(from, to);
 
   if (error) {
-    throw error
+    throw error;
   }
 
-  return data
+  return {data, count};
 }
