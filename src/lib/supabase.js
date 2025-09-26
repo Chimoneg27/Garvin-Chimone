@@ -78,6 +78,20 @@ export const getBookById = async (id) => {
   return data;
 };
 
+export const getMovieShowById = async (id) => {
+  const { data, error } = await supabase
+    .from("movies_shows")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return data
+}
+
 export async function addMovieShow(payload) {
   const {
     data: { session },
