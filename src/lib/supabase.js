@@ -132,6 +132,24 @@ export async function favBook(payload) {
   return data;
 }
 
+export async function favMovieShow(payload) {
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session?.access_token) {
+    throw new Error("No active session")
+  }
+
+  const { data, error } = await supabase.functions.invoke("movie-show-favorite", {
+    body: payload,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`
+    }
+  })
+
+  if (error) throw error
+  return data
+}
+
 export async function movieShowStatus(payload) {
   const {
     data: { session },
