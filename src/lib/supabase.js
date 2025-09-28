@@ -64,6 +64,17 @@ export const getMyBooks = async (page = 1, limit = 20) => {
   return { data, count };
 };
 
+export const getMyProjects = async () => {
+  const { data, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("created_at")
+
+  if (error) throw error
+
+  return { data }
+}
+
 export const getBookById = async (id) => {
   const { data, error } = await supabase
     .from("books")
