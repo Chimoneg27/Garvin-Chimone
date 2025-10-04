@@ -128,7 +128,6 @@ export default function MovieShowForm() {
               value={form.year_released_date}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-
             />
           </div>
 
@@ -179,7 +178,7 @@ export default function MovieShowForm() {
           <input
             name="starring"
             required
-            placeholder="e.g. fiction, mystery"
+            placeholder="e.g. Christian Bale, Brad Pitt"
             value={form.starring}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
@@ -218,7 +217,7 @@ export default function MovieShowForm() {
 
             <label className="flex items-center space-x-3 cursor-pointer">
               <input
-                type="want_to_watch"
+                type="checkbox"
                 name="want_to_read"
                 checked={form.want_to_watch}
                 onChange={handleChange}
