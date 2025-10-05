@@ -16,18 +16,20 @@ import {
   InsertCodeBlock,
   CreateLink,
   imagePlugin,
-  InsertImage
+  InsertImage,
+  BlockTypeSelect
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { useState } from "react";
 
 export default function EditorPage() {
-  const [body, setBody] = useState('')
+  const [body, setBody] = useState('# Start here')
 
   return (
     <MDXEditor
       markdown={body}
       onChange={(newMarkdown) => setBody(newMarkdown)}
+      contentEditableClassName="prose"
       plugins={[
         headingsPlugin(),
         listsPlugin(),
@@ -51,6 +53,7 @@ export default function EditorPage() {
               <Separator />
               <CreateLink />
               <InsertCodeBlock />
+               <BlockTypeSelect /> 
               <InsertImage />
             </>
           ),
@@ -59,24 +62,3 @@ export default function EditorPage() {
     />
   );
 }
-
-/*
-import { useState } from 'react'
-import { MDXEditor } from '@mdxeditor/editor'
-import { headingsPlugin } from '@mdxeditor/editor'
-import '@mdxeditor/editor/style.css'
-
-function App() {
-  const [body, setBody] = useState('# Hello world')
-
-  return (
-    <MDXEditor
-      markdown={body}
-      onChange={(newMarkdown) => setBody(newMarkdown)} // update state safely
-      plugins={[headingsPlugin()]}
-    />
-  )
-}
-
-export default App
-*/
