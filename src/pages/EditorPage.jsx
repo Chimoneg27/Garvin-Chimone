@@ -23,12 +23,32 @@ import "@mdxeditor/editor/style.css";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 
-const handleSubmit = () => {};
-
-const handleChange = () => {};
-
 export default function EditorPage() {
   const [body, setBody] = useState("# Start here");
+  const [status, setStatus] = useState("idle");
+  const [msg, setMsg] = useState("");
+  const [form, setForm] = useState({
+    author: "",
+    body: body,
+    image: "",
+    banner: "",
+    tags: "",
+    date_published: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setForm((prev) => ({ ...prev, [name]: val }));
+  };
+
+  const handleSubmit = asyn (e) => {
+    e.preventDefault()
+    setStatus("loading")
+    setMsg("")
+
+    
+  };
 
   return (
     <div>
@@ -48,7 +68,7 @@ export default function EditorPage() {
               <input
                 name="author"
                 required
-                // value={form.name}
+                value={form.author}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />
@@ -61,7 +81,7 @@ export default function EditorPage() {
               <input
                 name="banner"
                 required
-                // value={form.name}
+                value={form.banner}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />
@@ -74,22 +94,8 @@ export default function EditorPage() {
               <input
                 name="image"
                 required
-                // value={form.name}
+                value={form.image}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Video
-              </label>
-              <input
-                name="video"
-                required
-                // value={form.name}
-                onChange={handleChange}
-                placeholder="Optional"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />
             </div>
@@ -101,7 +107,7 @@ export default function EditorPage() {
               <input
                 name="date_published"
                 type="date"
-                // value={form.year_released_date}
+                value={form.date_published}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />
@@ -116,7 +122,7 @@ export default function EditorPage() {
               name="tags"
               required
               placeholder="e.g. personal, tech, notes, python"
-              // value={form.genres}
+              value={form.tags}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             />
