@@ -24,6 +24,26 @@ export async function addBook(payload) {
   return data;
 }
 
+export async function addBlog(payload) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.access_token) {
+    throw new Error("No active session");
+  }
+
+  const { data, error } = await supabase.functions.invoke("add-blog", {
+    body: payload,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+    },
+  });
+
+  if (error) throw error;
+  return data;
+}
+
 export async function bookStatus(payload) {
   const {
     data: { session },
@@ -68,12 +88,12 @@ export const getMyProjects = async () => {
   const { data, error } = await supabase
     .from("projects")
     .select("*")
-    .order("created_at")
+    .order("created_at");
 
-  if (error) throw error
+  if (error) throw error;
 
-  return { data }
-}
+  return { data };
+};
 
 export const getBookById = async (id) => {
   const { data, error } = await supabase
@@ -95,13 +115,14 @@ export const getMovieShowById = async (id) => {
     .select("*")
     .eq("id", id)
     .single()
+    .order("name");
 
   if (error) {
-    throw error
+    throw error;
   }
 
-  return data
-}
+  return data;
+};
 
 export async function addMovieShow(payload) {
   const {
@@ -144,21 +165,26 @@ export async function favBook(payload) {
 }
 
 export async function favMovieShow(payload) {
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session?.access_token) {
-    throw new Error("No active session")
+    throw new Error("No active session");
   }
 
-  const { data, error } = await supabase.functions.invoke("movie-show-favorite", {
-    body: payload,
-    headers: {
-      Authorization: `Bearer ${session.access_token}`
+  const { data, error } = await supabase.functions.invoke(
+    "movie-show-favorite",
+    {
+      body: payload,
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
     }
-  })
+  );
 
-  if (error) throw error
-  return data
+  if (error) throw error;
+  return data;
 }
 
 export async function movieShowStatus(payload) {
@@ -186,7 +212,7 @@ export async function movieShowStatus(payload) {
 
 export async function getMovieShows(page = 1, limit = 20) {
   const from = (page - 1) * limit;
-  const to = from + limit - 1
+  const to = from + limit - 1;
 
   const { data, error, count } = await supabase
     .from("movies_shows")
@@ -198,5 +224,5 @@ export async function getMovieShows(page = 1, limit = 20) {
     throw error;
   }
 
-  return {data, count};
+  return { data, count };
 }
