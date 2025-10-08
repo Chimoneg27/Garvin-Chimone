@@ -30,7 +30,6 @@ export default function EditorPage() {
   const [form, setForm] = useState({
     author: "",
     body: body,
-    image: "",
     banner: "",
     tags: "",
     date_published: "",
@@ -42,12 +41,28 @@ export default function EditorPage() {
     setForm((prev) => ({ ...prev, [name]: val }));
   };
 
-  const handleSubmit = asyn (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus("loading")
     setMsg("")
 
-    
+    const payload = {
+      author: form.author.trim(),
+      body: form.body.trim(),
+      date_published: form.date_published
+        ? new Date(form.date_published).toISOString()
+        : undefined,
+      banner: form.banner?.trim() || undefined,
+      tags: form.tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean)
+    }
+
+    if (!payload.author || !payload.body) {
+      setStatus("error")
+      setMsg("Please provide the author and a proper blog post")
+    }
   };
 
   return (
