@@ -95,6 +95,17 @@ export const getMyProjects = async () => {
   return { data };
 };
 
+export const getMyBlogs = async () => {
+  const { data, error } = await supabase
+    .from("blogs")
+    .select("*")
+    .order("created_at")
+
+    if (error) throw error
+
+  return { data }
+}
+
 export const getBookById = async (id) => {
   const { data, error } = await supabase
     .from("books")
