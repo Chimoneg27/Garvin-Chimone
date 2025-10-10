@@ -22,6 +22,7 @@ import {
 import "@mdxeditor/editor/style.css";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import { addBlog } from "../lib/supabase";
 
 export default function EditorPage() {
   const [body, setBody] = useState("# Start here");
@@ -42,9 +43,9 @@ export default function EditorPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setStatus("loading")
-    setMsg("")
+    e.preventDefault();
+    setStatus("loading");
+    setMsg("");
 
     const payload = {
       author: form.author.trim(),
@@ -56,12 +57,30 @@ export default function EditorPage() {
       tags: form.tags
         .split(",")
         .map((t) => t.trim())
-        .filter(Boolean)
-    }
+        .filter(Boolean),
+    };
 
     if (!payload.author || !payload.body) {
-      setStatus("error")
-      setMsg("Please provide the author and a proper blog post")
+      setStatus("error");
+      setMsg("Please provide the author and a proper blog post");
+    }
+
+    try {
+      const result = await addBlog(payload);
+      console.log("Edge response", result);
+      setStatus("success");
+      setMsg("Blog added successfully!");
+      setForm({
+        author: "",
+        body: "",
+        date_published: "",
+        banner: "",
+        tags: "",
+      });
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setMsg(err.message || "Something went wrong with sending your blog");
     }
   };
 
@@ -142,6 +161,28 @@ export default function EditorPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             />
           </div>
+
+          <div className="pt-4">
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {status === "loading" ? "Saving..." : "Add Blog"}
+            </button>
+          </div>
+
+          {status === "success" && (
+            <div className="p-4 bg-green-50 border border-green-200 rounded-md">
+              <p className="text-green-800 text-sm font-medium">{msg}</p>
+            </div>
+          )}
+
+          {status === "error" && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-red-800 text-sm font-medium">{msg}</p>
+            </div>
+          )}
         </form>
       </div>
 
@@ -179,9 +220,6 @@ export default function EditorPage() {
           }),
         ]}
       />
-      <button className="ml-3 p-3 text-white bg-black font-bold w-36 text-center rounded-md active:bg-gray-600">
-        Submit Blog
-      </button>
     </div>
   );
 }
