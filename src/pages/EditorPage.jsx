@@ -30,7 +30,6 @@ export default function EditorPage() {
   const [msg, setMsg] = useState("");
   const [form, setForm] = useState({
     author: "",
-    body: body,
     banner: "",
     tags: "",
     date_published: "",
@@ -49,7 +48,7 @@ export default function EditorPage() {
 
     const payload = {
       author: form.author.trim(),
-      body: form.body.trim(),
+      main_body: body.trim(),
       date_published: form.date_published
         ? new Date(form.date_published).toISOString()
         : undefined,
@@ -60,9 +59,10 @@ export default function EditorPage() {
         .filter(Boolean),
     };
 
-    if (!payload.author || !payload.body) {
+    if (!payload.author || !payload.main_body) {
       setStatus("error");
       setMsg("Please provide the author and a proper blog post");
+      return;
     }
 
     try {
@@ -72,11 +72,11 @@ export default function EditorPage() {
       setMsg("Blog added successfully!");
       setForm({
         author: "",
-        body: "",
         date_published: "",
         banner: "",
         tags: "",
       });
+      setBody("# Start here");
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -110,25 +110,11 @@ export default function EditorPage() {
 
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">
-                Banner URL*
+                Banner URL
               </label>
               <input
                 name="banner"
-                required
                 value={form.banner}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Image URL*
-              </label>
-              <input
-                name="image"
-                required
-                value={form.image}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />
