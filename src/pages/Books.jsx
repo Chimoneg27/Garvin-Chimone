@@ -71,6 +71,10 @@ export default function Books() {
     }
   };
 
+  const filterBooks = () => {
+    return []
+  }
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
