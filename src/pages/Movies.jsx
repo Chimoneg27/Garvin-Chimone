@@ -63,7 +63,7 @@ export default function MoviesTV() {
     }
 
     if (status === "want") {
-      const wanting = toFilter((movieShow) => movieShow.want_to_watch === true);
+      const wanting = toFilter.filter((movieShow) => movieShow.want_to_watch === true);
       setMoviesShows(wanting);
     }
   };

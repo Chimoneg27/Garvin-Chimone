@@ -1,15 +1,17 @@
-import { getMovieShowById } from "../lib/supabase";
+import { getMovieShowById, favMovieShow } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
+import { userRole } from "../hooks/userRoleHook";
 
 export default function MoviesPage() {
   const [moviesShows, setMoviesShows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
+  const { role } = userRole();
 
   const { id } = useParams();
 
@@ -58,6 +60,39 @@ export default function MoviesPage() {
 
     fetchMoviesShows();
   }, [id]);
+
+  const getFavMovieShow = (movieShow) => {
+    if (movieShow.favorite === true) {
+      return {
+        text: "Favorite",
+        bgColor: "bg-red-500 dark:bg-red-900",
+        textColor: "text-white font-bold",
+      };
+    } else {
+      return {
+        text: "Not Set",
+        bgColor: "bg-gray-100 dark:bg-gray-700",
+        textColor: "text-gray-600 dark:text-gray-400",
+      };
+    }
+  };
+
+  const makeFavorite = async (showMovieId, newFavorite) => {
+    try {
+      await favMovieShow({
+        showMovieId: showMovieId,
+        newFavorite: newFavorite,
+      });
+
+      setMoviesShows((prevMovieShow) => ({
+        ...prevMovieShow,
+        favorite: newFavorite === "favorite",
+      }));
+    } catch (error) {
+      console.error("Error making this movie or show your favorite", error);
+      alert("Failed to update favorite book, try again");
+    }
+  };
 
   if (loading)
     return (
@@ -183,6 +218,32 @@ export default function MoviesPage() {
                     >
                       {getMovieShowStatus(moviesShows).text}
                     </span>
+                  </div>
+                  <div className="mt-6">
+                    {role === "admin" ? (
+                      <select
+                        value={moviesShows.favorite ? "favorite" : "not_set"}
+                        onChange={(e) =>
+                          makeFavorite(moviesShows.id, e.target.value)
+                        }
+                        className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors ${
+                          getFavMovieShow(moviesShows).bgColor
+                        } ${getFavMovieShow(moviesShows).textColor}`}
+                      >
+                        <option value="favorite">Favorite</option>
+                        <option value="not_set">Not Set</option>
+                      </select>
+                    ) : moviesShows.favorite === true ? (
+                      <p
+                        className={`w-full px-4 py-2 rounded-lg text-sm font-medium border-2 text-center ${
+                          getFavMovieShow(moviesShows).bgColor
+                        } ${getFavMovieShow(moviesShows).textColor} `}
+                      >
+                        Favorite
+                      </p>
+                    ) : (
+                      <p>Not Set</p>
+                    )}
                   </div>
                 </div>
               </div>
