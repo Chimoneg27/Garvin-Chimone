@@ -11,6 +11,7 @@ export default function MoviesTV() {
   const { role } = userRole();
   const { color } = useTheme();
   const [moviesShows, setMoviesShows] = useState([]);
+  const [toFilter, setToFilter] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
@@ -23,6 +24,7 @@ export default function MoviesTV() {
         setLoading(true);
         const { data, count } = await getMovieShows(page, limit);
         setMoviesShows(data);
+        setToFilter(data);
         setTotalPages(Math.ceil(count / limit));
         console.log(data);
       } catch (err) {
@@ -35,6 +37,36 @@ export default function MoviesTV() {
 
     fetchMoviesShows();
   }, [page, limit]);
+
+  const filterShowsMovies = (status) => {
+    if (status === "watching") {
+      const watching = toFilter.filter(
+        (movieShow) => movieShow.watching === true
+      );
+      setMoviesShows(watching);
+    }
+
+    if (status === "all") {
+      setMoviesShows(toFilter);
+    }
+
+    if (status === "watched") {
+      const watched = toFilter.filter(
+        (movieShow) => movieShow.watched === true
+      );
+      setMoviesShows(watched);
+    }
+
+    if (status === "fav") {
+      const favorite = toFilter.filter((movieShow) => movieShow.favorite === true);
+      setMoviesShows(favorite);
+    }
+
+    if (status === "want") {
+      const wanting = toFilter((movieShow) => movieShow.want_to_watch === true);
+      setMoviesShows(wanting);
+    }
+  };
 
   const handleStatusChange = async (movieShowId, newStatus) => {
     try {
@@ -143,6 +175,41 @@ export default function MoviesTV() {
           <h2 className="text-xl md:text-2xl font-medium text-center text-gray-600 dark:text-gray-300 mb-12">
             My movies and shows library
           </h2>
+
+          <div className="flex justify-center mt-4">
+            <ul className="flex justify-center space-x-4 mt-4">
+              <li
+                onClick={() => filterShowsMovies("all")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                All Movies & Shows
+              </li>
+              <li
+                onClick={() => filterShowsMovies("watching")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Currently Watching
+              </li>
+              <li
+                onClick={() => filterShowsMovies("watched")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Completed
+              </li>
+              <li
+                onClick={() => filterShowsMovies("fav")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Favorite
+              </li>
+              <li
+                onClick={() => filterShowsMovies("want")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Want to Watch
+              </li>
+            </ul>
+          </div>
 
           {moviesShows.length > 0 ? (
             <ul className="p-6 w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
