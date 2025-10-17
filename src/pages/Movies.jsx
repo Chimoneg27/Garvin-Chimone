@@ -62,8 +62,9 @@ export default function MoviesTV() {
       setMoviesShows(favorite);
     }
 
-    if (status === "want") {
+    if (status === "want_to_watch") {
       const wanting = toFilter.filter((movieShow) => movieShow.want_to_watch === true);
+      console.log(wanting)
       setMoviesShows(wanting);
     }
   };
@@ -203,7 +204,7 @@ export default function MoviesTV() {
                 Favorite
               </li>
               <li
-                onClick={() => filterShowsMovies("want")}
+                onClick={() => filterShowsMovies("want_to_watch")}
                 className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
               >
                 Want to Watch
