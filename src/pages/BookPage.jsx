@@ -224,7 +224,7 @@ export default function BooksPage() {
                         } ${getFavBook(book).textColor}`}
                       >
                         <option value="favorite">Favorite</option>
-                        <option value="not_set"></option>
+                        <option value="not_set">Not Set</option>
                       </select>
                     ) : book.favorite_book === true ? (
                       <p
@@ -235,7 +235,7 @@ export default function BooksPage() {
                         Favorite
                       </p>
                     ) : (
-                      <></>
+                      <p>Not Set</p>
                     )}
                   </div>
                 </div>
