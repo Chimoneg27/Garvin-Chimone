@@ -97,7 +97,7 @@ export const getMyProjects = async () => {
 
 export const getMyBlogs = async () => {
   const { data, error } = await supabase
-    .from("blogs")
+    .from("blog")
     .select("*")
     .order("created_at")
 
