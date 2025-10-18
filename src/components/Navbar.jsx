@@ -74,7 +74,7 @@ export default function Navbar() {
         {!user ? (
           <Link to="/SignIn" className="hidden md:block">
             <li>
-              <button className="bg-black text-white font-bold p-2 rounded-md">
+              <button className="text-white font-bold p-2 rounded-md" style={{ backgroundColor: color }}>
                 Login
               </button>
             </li>
@@ -82,7 +82,7 @@ export default function Navbar() {
         ) : (
           <Link to="/" className="hidden md:block">
             <li onClick={logout}>
-              <button className="bg-black text-white font-bold p-2 rounded-md">
+              <button className="text-white font-bold p-2 rounded-md" style={{ backgroundColor: color }}>
                 Logout
               </button>
             </li>
