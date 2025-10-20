@@ -1,8 +1,8 @@
 import "./styles/index.css";
 import Home from "./pages/Home";
 import Dev from "./pages/Dev";
-import Books from './pages/Books'
-import Music from './pages/Music'
+import Books from "./pages/Books";
+import Music from "./pages/Music";
 import MoviesTV from "./pages/Movies";
 import Signup from "./auth/Signup";
 import { Routes, Route } from "react-router-dom";
@@ -26,12 +26,17 @@ function App() {
         <Route path="/Books" element={<Books />} />
         <Route path="/Projects" element={<Projects />} />
         <Route path="/Blog" element={<Blog />} />
-        <Route path='/Books/:id' element={<BooksPage />}/>
+        <Route path="/Books/:id" element={<BooksPage />} />
         <Route path="/SignUp" element={<Signup />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/Blogwriter" element={<ProtectedRoute>
-          <EditorPage />
-        </ProtectedRoute>} />
+        <Route
+          path="/Blogwriter"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <EditorPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
