@@ -12,6 +12,7 @@ import Projects from "./pages/Projects";
 import MoviesPage from "./pages/MoviesPage";
 import Blog from "./pages/Blog";
 import EditorPage from "./pages/EditorPage";
+import ProtectedRoute from "./components/ProtectedRoutes";
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
         <Route path='/Books/:id' element={<BooksPage />}/>
         <Route path="/SignUp" element={<Signup />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/Blogwriter" element={<EditorPage />} />
+        <Route path="/Blogwriter" element={<ProtectedRoute>
+          <EditorPage />
+        </ProtectedRoute>} />
       </Routes>
     </>
   );
