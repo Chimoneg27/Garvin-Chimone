@@ -1,14 +1,14 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieShowForm from "../components/MovieShowFrom";
-import { userRole } from "../hooks/userRoleHook";
+import { useUserRole } from "../hooks/useUserRoleHook";
 import { useState, useEffect } from "react";
 import { getMovieShows, movieShowStatus } from "../lib/supabase";
 import { useTheme } from "../components/ThemeContext";
 import { Link } from "react-router-dom";
 
 export default function MoviesTV() {
-  const { role } = userRole();
+  const { role } = useUserRole();
   const { color } = useTheme();
   const [moviesShows, setMoviesShows] = useState([]);
   const [toFilter, setToFilter] = useState([]);

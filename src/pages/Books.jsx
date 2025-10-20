@@ -2,13 +2,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
 import BookForm from "../components/BookForm";
-import { userRole } from "../hooks/userRoleHook";
+import { useUserRole } from "../hooks/useUserRoleHook";
 import { getMyBooks, bookStatus } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Books() {
-  const { role } = userRole();
+  const { role } = useUserRole();
   const [books, setBooks] = useState([]);
   const [toFilter, setToFilter] = useState([]);
   const [loading, setLoading] = useState(true);
