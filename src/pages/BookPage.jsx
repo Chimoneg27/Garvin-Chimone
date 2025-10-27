@@ -4,14 +4,14 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
-import { userRole } from "../hooks/userRoleHook";
+import { useUserRole } from "../hooks/useUserRoleHook";
 
 export default function BooksPage() {
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
-  const { role } = userRole();
+  const { role } = useUserRole();
 
   const { id } = useParams();
 
@@ -224,7 +224,7 @@ export default function BooksPage() {
                         } ${getFavBook(book).textColor}`}
                       >
                         <option value="favorite">Favorite</option>
-                        <option value="not_set"></option>
+                        <option value="not_set">Not Set</option>
                       </select>
                     ) : book.favorite_book === true ? (
                       <p
@@ -235,7 +235,7 @@ export default function BooksPage() {
                         Favorite
                       </p>
                     ) : (
-                      <></>
+                      <p>Not Set</p>
                     )}
                   </div>
                 </div>

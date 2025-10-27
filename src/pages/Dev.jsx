@@ -1,7 +1,6 @@
 import SplitText from "../components/SplitText";
 import basq from "../assets/Basquiat.jpeg";
 import cv from "../assets/GarvinCV.pdf";
-import Slider from "../components/Slider";
 import geye from "../assets/GEYE.jpg";
 import BasicForm from "../components/BasicForm";
 import Footer from "../components/Footer";
@@ -107,7 +106,6 @@ export default function Dev() {
         >
           The Tech I Use
         </h2>
-        <Slider />
       </div>
 
       {/* Contact Form */}

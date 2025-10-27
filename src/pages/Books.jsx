@@ -2,14 +2,15 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeContext";
 import BookForm from "../components/BookForm";
-import { userRole } from "../hooks/userRoleHook";
+import { useUserRole } from "../hooks/useUserRoleHook";
 import { getMyBooks, bookStatus } from "../lib/supabase";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Books() {
-  const { role } = userRole();
+  const { role } = useUserRole();
   const [books, setBooks] = useState([]);
+  const [toFilter, setToFilter] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
@@ -71,12 +72,37 @@ export default function Books() {
     }
   };
 
+  const filterBooks = (status) => {
+    if (status === "reading") {
+      const reading = toFilter.filter((book) => book.reading === true);
+      setBooks(reading);
+    }
+    if (status === "all") {
+      setBooks(toFilter);
+    }
+    if (status === "read") {
+      const read = toFilter.filter((book) => book.read === true);
+      setBooks(read);
+    }
+
+    if (status === "fav") {
+      const favorite = toFilter.filter((book) => book.favorite_book === true);
+      setBooks(favorite);
+    }
+
+    if (status === "want") {
+      const wanting = toFilter.filter((book) => book.want_to_read === true);
+      setBooks(wanting);
+    }
+  };
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
         const { data, count } = await getMyBooks(page, limit);
         setBooks(data);
+        setToFilter(data);
         setTotalPages(Math.ceil(count / limit));
         console.log(data);
       } catch (err) {
@@ -143,6 +169,41 @@ export default function Books() {
           <h2 className="text-xl md:text-2xl font-medium text-center text-gray-600 dark:text-gray-300 mb-12">
             My Book Collection
           </h2>
+
+          <div className="flex justify-center mt-4">
+            <ul className="flex justify-center space-x-4 mt-4">
+              <li
+                onClick={() => filterBooks("all")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                All Books
+              </li>
+              <li
+                onClick={() => filterBooks("reading")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Currently Reading
+              </li>
+              <li
+                onClick={() => filterBooks("read")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Completed
+              </li>
+              <li
+                onClick={() => filterBooks("fav")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Favorite
+              </li>
+              <li
+                onClick={() => filterBooks("want")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                Want to Read
+              </li>
+            </ul>
+          </div>
 
           {books.length > 0 ? (
             <ul className="p-6 w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

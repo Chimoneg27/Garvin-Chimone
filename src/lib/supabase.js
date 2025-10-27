@@ -97,7 +97,7 @@ export const getMyProjects = async () => {
 
 export const getMyBlogs = async () => {
   const { data, error } = await supabase
-    .from("blogs")
+    .from("blog")
     .select("*")
     .order("created_at")
 
@@ -228,7 +228,7 @@ export async function getMovieShows(page = 1, limit = 20) {
   const { data, error, count } = await supabase
     .from("movies_shows")
     .select("*", { count: "exact" })
-    .order("name")
+    .order("created_at")
     .range(from, to);
 
   if (error) {

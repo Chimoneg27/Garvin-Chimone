@@ -218,7 +218,7 @@ export default function MovieShowForm() {
             <label className="flex items-center space-x-3 cursor-pointer">
               <input
                 type="checkbox"
-                name="want_to_read"
+                name="want_to_watch"
                 checked={form.want_to_watch}
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
