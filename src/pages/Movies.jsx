@@ -58,14 +58,31 @@ export default function MoviesTV() {
     }
 
     if (status === "fav") {
-      const favorite = toFilter.filter((movieShow) => movieShow.favorite === true);
+      const favorite = toFilter.filter(
+        (movieShow) => movieShow.favorite === true
+      );
       setMoviesShows(favorite);
     }
 
     if (status === "want_to_watch") {
-      const wanting = toFilter.filter((movieShow) => movieShow.want_to_watch === true);
-      console.log(wanting)
+      const wanting = toFilter.filter(
+        (movieShow) => movieShow.want_to_watch === true
+      );
+      console.log(wanting);
       setMoviesShows(wanting);
+    }
+
+    if (status === "AtwoZ") {
+      setMoviesShows(
+        [...toFilter].sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        })
+      );
     }
   };
 
@@ -208,6 +225,12 @@ export default function MoviesTV() {
                 className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
               >
                 Want to Watch
+              </li>
+              <li
+                onClick={() => filterShowsMovies("AtwoZ")}
+                className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+              >
+                A to Z
               </li>
             </ul>
           </div>
