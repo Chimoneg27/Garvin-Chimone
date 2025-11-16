@@ -3,13 +3,11 @@ import Home from "./pages/Home";
 import Dev from "./pages/Dev";
 import Books from "./pages/Books";
 import Music from "./pages/Music";
-import MoviesTV from "./pages/Movies";
 import Signup from "./auth/Signup";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./auth/SignIn";
 import BooksPage from "./pages/BookPage";
 import Projects from "./pages/Projects";
-import MoviesPage from "./pages/MoviesPage";
 import Blog from "./pages/Blog";
 import EditorPage from "./pages/EditorPage";
 import ProtectedRoute from "./components/ProtectedRoutes";
@@ -21,8 +19,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Dev" element={<Dev />} />
         <Route path="/MusicLibrary" element={<Music />} />
-        <Route path="/Movies&TV" element={<MoviesTV />} />
-        <Route path="/Movies&TV/:id" element={<MoviesPage />} />
         <Route path="/Books" element={<Books />} />
         <Route path="/Projects" element={<Projects />} />
         <Route path="/Blog" element={<Blog />} />

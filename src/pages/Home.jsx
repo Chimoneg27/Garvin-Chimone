@@ -19,7 +19,6 @@ const Home = () => {
             { id: "dev", label: "Dev", to: "/Dev" },
             { id: "music", label: "Music", to: "/MusicLibrary" },
             { id: "books", label: "Books", to: "/Books" },
-            { id: "movies", label: "Movies & Shows", to: "/Movies&TV" },
             { id: "projects", label: "Projects", to: "/Projects" },
             { id: "Blog", label: "Blog", to: "/Blog" },
             
