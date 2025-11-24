@@ -106,6 +106,20 @@ export const getMyBlogs = async () => {
   return { data }
 }
 
+export const getBlogsById = async (id) => {
+  const { data, error } = await supabase
+    .from("blog")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return data
+}
+
 export const getBookById = async (id) => {
   const { data, error } = await supabase
     .from("books")
