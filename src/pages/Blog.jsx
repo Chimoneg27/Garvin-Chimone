@@ -5,6 +5,7 @@ import { useTheme } from "../components/ThemeContext";
 import { useState, useEffect } from "react";
 import { getMyBlogs } from "../lib/supabase";
 import Signup from "../auth/Signup";
+import { Link } from "react-router";
 
 export default function Blog() {
   const { color } = useTheme();
@@ -95,7 +96,8 @@ export default function Blog() {
                       {formatDate(blog.date_published)}
                     </p>
 
-                    <button
+                    <Link
+                      to={`/blogs/${blog.id}`}
                       className="
                 text-white px-5 py-2.5 rounded-lg 
                 font-medium shadow-md
@@ -106,7 +108,7 @@ export default function Blog() {
               "
                     >
                       View Blog
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </li>
