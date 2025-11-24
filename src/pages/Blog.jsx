@@ -11,8 +11,6 @@ export default function Blog() {
   const { color } = useTheme();
   const { user } = useAuth();
   const [blogs, setBlogs] = useState([]);
-  // const [loading, setLoading] = useState(true)
-  // const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -73,7 +71,6 @@ export default function Blog() {
             border border-gray-200 dark:border-gray-700
           "
                 >
-                  {/* Image */}
                   <div className="w-full md:w-1/2 h-60 md:h-auto overflow-hidden">
                     <img
                       src={blog.banner}
@@ -86,7 +83,6 @@ export default function Blog() {
                     />
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 p-6 flex flex-col justify-center">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                       {blog.title}

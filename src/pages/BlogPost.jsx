@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-// import { useTheme } from "@material-tailwind/react";
 
 export default function BlogPost() {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const { color } = useTheme();
 
   const { id } = useParams();
 
@@ -103,11 +101,63 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <Navbar />
-      <div className="prose dark:prose-invert max-w-none">
-        <ReactMarkdown>{blog.main_body}</ReactMarkdown>
-      </div>
+
+      {/* Main content wrapper */}
+      <main className="flex-1 w-full px-4 md:px-0">
+        <article className="prose dark:prose-invert prose-lg md:prose-xl max-w-3xl mx-auto py-12">
+          <div className="mb-8">
+            <Link
+              to="/blogs"
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Back to Blogs
+            </Link>
+          </div>
+          <h1 className="text-4xl font-bold mb-6">{blog.title}</h1>
+
+          <div className="mb-10 text-left space-y-1 text-lg font-medium max-w-md">
+            <p className="text-3xl">
+              <span className="font-semibold">Author:</span> {blog.author}
+            </p>
+            <p className="text-xl">
+              <span className="font-semibold">Date:</span>{" "}
+              {new Date(blog.date_published).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </p>
+            <p className="text-xl">
+              <span className="font-semibold">Tags:</span>{" "}
+              {blog.tags?.join(", ")}
+            </p>
+          </div>
+
+          <img
+            src={blog.banner}
+            alt={blog.title}
+            className="rounded-xl w-full mb-12 shadow-md"
+          />
+
+          <ReactMarkdown>{blog.main_body}</ReactMarkdown>
+        </article>
+      </main>
+
       <Footer />
     </div>
   );
