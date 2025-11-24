@@ -20,7 +20,7 @@ const Home = () => {
             { id: "music", label: "Music", to: "/MusicLibrary" },
             { id: "books", label: "Books", to: "/Books" },
             { id: "projects", label: "Projects", to: "/Projects" },
-            { id: "Blog", label: "Blog", to: "/Blog" },
+            { id: "Blog", label: "Blogs", to: "/Blogs" },
             
           ].map(({ id, label, to }) => (
             <li

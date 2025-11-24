@@ -54,7 +54,7 @@ export default function Navbar() {
             <ComputerOutlined fontSize="inherit" />
           </li>
         </Link>
-        <Link to="/Blog">
+        <Link to="/Blogs">
           <li>
             <Feed fontSize="inherit" />
           </li>
@@ -123,7 +123,7 @@ export default function Navbar() {
           <Link to="/Books" onClick={() => setIsOpen(false)}>
             <Book fontSize="large" /> Books
           </Link>
-          <Link to="/Blog" onClick={() => setIsOpen(false)}>
+          <Link to="/Blogs" onClick={() => setIsOpen(false)}>
             <Feed fontSize="large" /> Blog
           </Link>
           <Link to="/Dev" onClick={() => setIsOpen(false)}>
