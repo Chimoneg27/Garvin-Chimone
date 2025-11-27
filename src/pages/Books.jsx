@@ -14,10 +14,7 @@ export default function Books() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { color } = useTheme();
-  const [page, setPage] = useState(1);
-  const [limit] = useState(20);
-  const [totalPages, setTotalPages] = useState(0);
-
+  
   const getBookStatus = (book) => {
     if (book.read) {
       return {
@@ -96,25 +93,23 @@ export default function Books() {
     }
   };
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        setLoading(true);
-        const { data, count } = await getMyBooks(page, limit);
-        setBooks(data);
-        setToFilter(data);
-        setTotalPages(Math.ceil(count / limit));
-        console.log(data);
-      } catch (err) {
-        console.error("Error fetching books:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+useEffect(() => {
+  const fetchBooks = async () => {
+    try {
+      setLoading(true);
+      const { data } = await getMyBooks();
+      setBooks(data);
+      setToFilter(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchBooks();
-  }, [page, limit]);
+  fetchBooks();
+}, []);
+
 
   if (loading)
     return (
@@ -308,27 +303,7 @@ export default function Books() {
             </div>
           )}
         </div>
-        <div className="flex items-center justify-center gap-4 mt-8">
-          <button
-            onClick={() => setPage((p) => Math.max(p - 1, 1))}
-            disabled={page === 1}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
-          >
-            Previous
-          </button>
 
-          <span className="text-gray-600 dark:text-gray-300 font-medium">
-            Page {page} of {totalPages}
-          </span>
-
-          <button
-            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-            disabled={page === totalPages}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:hover:shadow-none"
-          >
-            Next
-          </button>
-        </div>
       </div>
       <Footer />
     </div>
