@@ -5,12 +5,12 @@ import {
   HouseOutlined,
   MusicNoteOutlined,
   Book,
-  LiveTvOutlined,
   GitHub,
   ComputerOutlined,
   Menu,
   Close,
-  Feed
+  Feed,
+  Build,
 } from "@mui/icons-material";
 import { useAuth } from "../auth/AuthProvider";
 
@@ -44,9 +44,9 @@ export default function Navbar() {
             <MusicNoteOutlined fontSize="inherit" />
           </li>
         </Link>
-        <Link to="/Movies&TV">
+        <Link to="/Books">
           <li>
-            <LiveTvOutlined fontSize="inherit" />
+            <Book fontSize="inherit" />
           </li>
         </Link>
         <Link to="/Dev">
@@ -57,6 +57,11 @@ export default function Navbar() {
         <Link to="/Blogs">
           <li>
             <Feed fontSize="inherit" />
+          </li>
+        </Link>
+        <Link to="/Projects">
+          <li>
+            <Build fontSize="inherit" />
           </li>
         </Link>
       </ul>
@@ -128,6 +133,9 @@ export default function Navbar() {
           </Link>
           <Link to="/Dev" onClick={() => setIsOpen(false)}>
             <ComputerOutlined fontSize="large" /> Dev
+          </Link>
+          <Link to="/Projects">
+            <Build fontSize="inherit" />
           </Link>
           <a
             href="https://github.com/Chimoneg27"
