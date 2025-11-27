@@ -5,13 +5,12 @@ import { useTheme } from "../components/ThemeContext";
 import { useState, useEffect } from "react";
 import { getMyBlogs } from "../lib/supabase";
 import Signup from "../auth/Signup";
+import { Link } from "react-router";
 
 export default function Blog() {
   const { color } = useTheme();
   const { user } = useAuth();
   const [blogs, setBlogs] = useState([]);
-  // const [loading, setLoading] = useState(true)
-  // const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -24,12 +23,12 @@ export default function Blog() {
   }, []);
 
   function formatDate(dateString) {
-  return new Date(dateString).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
+    return new Date(dateString).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  }
 
   return (
     <div>
@@ -58,30 +57,60 @@ export default function Blog() {
           </div>
         </div>
       ) : (
-        <ul>
-          {blogs.map((blog) => (
-            <li key={blog.id}>
-              <div className="flex flex-col md:flex-row bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden max-w-4xl mx-auto mb-6">
-                <div className="flex-1 p-6 flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    {blog.title}
-                  </h3>
-                  <p className="text-gray-500 mb-4">{formatDate(blog.date_published)}</p>
-                  <button className="text-white px-4 py-2 rounded-lg transition-colors w-fit" style={{ backgroundColor: color }}>
-                    View Blog
-                  </button>
+        <div className="px-4 sm:px-6 lg:px-0 max-w-5xl mx-auto">
+          <ul className="space-y-8">
+            {blogs.map((blog) => (
+              <li key={blog.id}>
+                <div
+                  className="
+            flex flex-col md:flex-row 
+            bg-white dark:bg-gray-900
+            rounded-2xl shadow-lg hover:shadow-2xl 
+            transition-all duration-300 
+            overflow-hidden
+            border border-gray-200 dark:border-gray-700
+          "
+                >
+                  <div className="w-full md:w-1/2 h-60 md:h-auto overflow-hidden">
+                    <img
+                      src={blog.banner}
+                      alt={blog.title}
+                      className="
+                w-full h-full object-cover 
+                hover:scale-105 
+                transition-transform duration-500
+              "
+                    />
+                  </div>
+
+                  <div className="flex-1 p-6 flex flex-col justify-center">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      {blog.title}
+                    </h3>
+
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                      {formatDate(blog.date_published)}
+                    </p>
+
+                    <Link
+                      to={`/blogs/${blog.id}`}
+                      className="
+                text-white px-5 py-2.5 rounded-lg 
+                font-medium shadow-md
+                transition-transform duration-300 
+                hover:scale-105
+                w-fit
+                bg-black
+              "
+                    >
+                      View Blog
+                    </Link>
+                  </div>
                 </div>
-                <div className="md:w-1/2 w-full">
-                  <img
-                    src={blog.banner}
-                    alt={blog.title}
-                    className="w-full h-56 md:h-full object-cover rounded-t-2xl md:rounded-none md:rounded-r-2xl"
-                  />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
       <Footer />
     </div>

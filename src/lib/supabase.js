@@ -67,22 +67,17 @@ export async function bookStatus(payload) {
   return data;
 }
 
-export const getMyBooks = async (page = 1, limit = 20) => {
-  const from = (page - 1) * limit;
-  const to = from + limit - 1;
-
-  const { data, error, count } = await supabase
+export const getMyBooks = async () => {
+  const { data, error } = await supabase
     .from("books")
-    .select("*", { count: "exact" })
-    .order("name")
-    .range(from, to);
+    .select("*")
+    .order("name");
 
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
 
-  return { data, count };
+  return { data };
 };
+
 
 export const getMyProjects = async () => {
   const { data, error } = await supabase
@@ -104,6 +99,20 @@ export const getMyBlogs = async () => {
     if (error) throw error
 
   return { data }
+}
+
+export const getBlogsById = async (id) => {
+  const { data, error } = await supabase
+    .from("blog")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }
 
 export const getBookById = async (id) => {

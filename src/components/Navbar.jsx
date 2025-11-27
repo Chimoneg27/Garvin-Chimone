@@ -5,11 +5,12 @@ import {
   HouseOutlined,
   MusicNoteOutlined,
   Book,
-  LiveTvOutlined,
   GitHub,
   ComputerOutlined,
   Menu,
   Close,
+  Feed,
+  Build,
 } from "@mui/icons-material";
 import { useAuth } from "../auth/AuthProvider";
 
@@ -19,8 +20,8 @@ export default function Navbar() {
   const { user, signOut } = useAuth();
 
   const logout = () => {
-    signOut()
-  }
+    signOut();
+  };
 
   return (
     <nav className="p-4 flex justify-between items-center w-11/12 mx-auto relative navbar">
@@ -48,14 +49,19 @@ export default function Navbar() {
             <Book fontSize="inherit" />
           </li>
         </Link>
-        <Link to="/Movies&TV">
-          <li>
-            <LiveTvOutlined fontSize="inherit" />
-          </li>
-        </Link>
         <Link to="/Dev">
           <li>
             <ComputerOutlined fontSize="inherit" />
+          </li>
+        </Link>
+        <Link to="/Blogs">
+          <li>
+            <Feed fontSize="inherit" />
+          </li>
+        </Link>
+        <Link to="/Projects">
+          <li>
+            <Build fontSize="inherit" />
           </li>
         </Link>
       </ul>
@@ -74,7 +80,10 @@ export default function Navbar() {
         {!user ? (
           <Link to="/SignIn" className="hidden md:block">
             <li>
-              <button className="bg-black text-white font-bold p-2 rounded-md" style={{ backgroundColor: color }}>
+              <button
+                className="bg-black text-white font-bold p-2 rounded-md"
+                style={{ backgroundColor: color }}
+              >
                 Login
               </button>
             </li>
@@ -82,7 +91,10 @@ export default function Navbar() {
         ) : (
           <Link to="/" className="hidden md:block">
             <li onClick={logout}>
-              <button className="bg-black text-white font-bold p-2 rounded-md" style={{ backgroundColor: color }}>
+              <button
+                className="bg-black text-white font-bold p-2 rounded-md"
+                style={{ backgroundColor: color }}
+              >
                 Logout
               </button>
             </li>
@@ -116,11 +128,14 @@ export default function Navbar() {
           <Link to="/Books" onClick={() => setIsOpen(false)}>
             <Book fontSize="large" /> Books
           </Link>
-          <Link to="/Movies&TV" onClick={() => setIsOpen(false)}>
-            <LiveTvOutlined fontSize="large" /> Movies
+          <Link to="/Blogs" onClick={() => setIsOpen(false)}>
+            <Feed fontSize="large" /> Blog
           </Link>
           <Link to="/Dev" onClick={() => setIsOpen(false)}>
             <ComputerOutlined fontSize="large" /> Dev
+          </Link>
+          <Link to="/Projects">
+            <Build fontSize="inherit" />
           </Link>
           <a
             href="https://github.com/Chimoneg27"
@@ -129,7 +144,7 @@ export default function Navbar() {
           >
             <GitHub fontSize="large" /> GitHub
           </a>
-          
+
           {/* Mobile Auth Button */}
           {!user ? (
             <Link to="/SignIn" onClick={() => setIsOpen(false)}>
@@ -138,7 +153,7 @@ export default function Navbar() {
               </button>
             </Link>
           ) : (
-            <button 
+            <button
               className="bg-black text-white font-bold p-2 rounded-md flex items-center gap-2"
               onClick={() => {
                 logout();
