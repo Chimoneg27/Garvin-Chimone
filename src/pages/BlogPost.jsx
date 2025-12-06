@@ -104,7 +104,6 @@ export default function BlogPost() {
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <Navbar />
 
-      {/* Main content wrapper */}
       <main className="flex-1 w-full px-4 md:px-0">
         <article className="prose dark:prose-invert prose-lg md:prose-xl max-w-3xl mx-auto py-12">
           <div className="mb-8">
@@ -148,11 +147,16 @@ export default function BlogPost() {
             </p>
           </div>
 
-          <img
-            src={blog.banner}
-            alt={blog.title}
-            className="rounded-xl w-full mb-12 shadow-md"
-          />
+          <div className="w-full mb-12">
+            <img
+              src={blog.banner}
+              alt={blog.title}
+              className="rounded-xl w-full shadow-md"
+            />
+            <p className="text-center text-lg text-gray-600 dark:text-gray-400">
+              {blog.banner_desc}
+            </p>
+          </div>
 
           <ReactMarkdown>{blog.main_body}</ReactMarkdown>
         </article>
