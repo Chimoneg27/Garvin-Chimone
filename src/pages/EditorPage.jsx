@@ -31,6 +31,7 @@ export default function EditorPage() {
   const [form, setForm] = useState({
     author: "",
     banner: "",
+    banner_desc: "",
     tags: "",
     date_published: "",
   });
@@ -53,6 +54,7 @@ export default function EditorPage() {
         ? new Date(form.date_published).toISOString()
         : undefined,
       banner: form.banner?.trim() || undefined,
+      banner_desc: form.banner_desc.trim(),
       tags: form.tags
         .split(",")
         .map((t) => t.trim())
@@ -74,6 +76,7 @@ export default function EditorPage() {
         author: "",
         date_published: "",
         banner: "",
+        banner_desc: "",
         tags: "",
       });
       setBody("# Start here");
@@ -115,6 +118,18 @@ export default function EditorPage() {
               <input
                 name="banner"
                 value={form.banner}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Banner Description
+              </label>
+              <input
+                name="banner"
+                value={form.banner_desc}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               />

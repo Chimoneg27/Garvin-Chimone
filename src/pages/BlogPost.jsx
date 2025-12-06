@@ -146,6 +146,10 @@ export default function BlogPost() {
               <span className="font-semibold">Tags:</span>{" "}
               {blog.tags?.join(", ")}
             </p>
+
+            <p className="text-xl">
+              Image: {blog.banner_desc}
+            </p>
           </div>
 
           <img
