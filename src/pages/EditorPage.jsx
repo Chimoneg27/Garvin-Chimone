@@ -54,7 +54,7 @@ export default function EditorPage() {
         ? new Date(form.date_published).toISOString()
         : undefined,
       banner: form.banner?.trim() || undefined,
-      banner_desc: form.banner_desc.trim(),
+      banner_desc: form.banner_desc?.trim(),
       tags: form.tags
         .split(",")
         .map((t) => t.trim())
@@ -128,7 +128,7 @@ export default function EditorPage() {
                 Banner Description
               </label>
               <input
-                name="banner"
+                name="banner_desc"
                 value={form.banner_desc}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
