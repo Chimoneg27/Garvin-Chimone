@@ -146,17 +146,18 @@ export default function BlogPost() {
               <span className="font-semibold">Tags:</span>{" "}
               {blog.tags?.join(", ")}
             </p>
-
-            <p className="text-xl">
-              Image: {blog.banner_desc}
-            </p>
           </div>
 
-          <img
-            src={blog.banner}
-            alt={blog.title}
-            className="rounded-xl w-full mb-12 shadow-md"
-          />
+          <div className="w-full mb-12">
+            <img
+              src={blog.banner}
+              alt={blog.title}
+              className="rounded-xl w-full shadow-md"
+            />
+            <p className="text-center text-lg text-gray-600 dark:text-gray-400">
+              {blog.banner_desc}
+            </p>
+          </div>
 
           <ReactMarkdown>{blog.main_body}</ReactMarkdown>
         </article>
