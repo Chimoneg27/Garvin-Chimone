@@ -60,55 +60,60 @@ export default function Blog() {
             </div>
           </div>
         ) : (
-          <div className="px-4 sm:px-6 lg:px-0 max-w-5xl mx-auto">
-            <ul className="space-y-8">
+          <div className="px-4 sm:px-6 lg:px-0 max-w-5xl mx-auto pb-16">
+            <ul className="grid gap-8">
               {blogs.map((blog) => (
                 <li key={blog.id}>
                   <div
                     className="
-                      flex flex-col md:flex-row 
-                      bg-white dark:bg-gray-900
-                      rounded-2xl shadow-lg hover:shadow-2xl 
-                      transition-all duration-300 
-                      overflow-hidden
-                      border border-gray-200 dark:border-gray-700
-                    "
+            flex flex-col md:flex-row
+            bg-white dark:bg-gray-900
+            rounded-2xl shadow-lg hover:shadow-2xl
+            transition-all duration-300
+            overflow-hidden
+            border border-gray-200 dark:border-gray-700
+            h-64
+          "
                   >
-                    <div className="w-full md:w-1/2 h-60 md:h-auto overflow-hidden">
+                    {/* Banner */}
+                    <div className="w-full md:w-1/2 h-48 md:h-full overflow-hidden">
                       <img
-                        src={blog.banner}
-                        alt={blog.title}
+                        src={blog.banner ?? "/default-banner.jpg"}
+                        alt={blog.title ?? "Blog"}
                         className="
-                          w-full h-full object-cover 
-                          hover:scale-105 
-                          transition-transform duration-500
-                        "
+                w-full h-full object-cover
+                hover:scale-105
+                transition-transform duration-500
+              "
                       />
                     </div>
 
-                    <div className="flex-1 p-6 flex flex-col justify-center">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                        {blog.title}
-                      </h3>
+                    {/* Content */}
+                    <div className="flex-1 p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                          {blog.title}
+                        </h3>
 
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
-                        {formatDate(blog.date_published)}
-                      </p>
+                        <p className="text-gray-600 dark:text-gray-400 mb-2 text-sm">
+                          {formatDate(blog.date_published)}
+                        </p>
 
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
-                        Image: {blog.banner_desc}
-                      </p>
+                        <p className="text-gray-600 dark:text-gray-400 mb-2 text-sm">
+                          {blog.banner_desc}
+                        </p>
+                      </div>
 
                       <Link
                         to={`/blogs/${blog.id}`}
                         className="
-                          text-white px-5 py-2.5 rounded-lg 
-                          font-medium shadow-md
-                          transition-transform duration-300 
-                          hover:scale-105
-                          w-fit
-                          bg-black
-                        "
+                text-white px-5 py-2.5 rounded-lg
+                font-medium shadow-md
+                transition-transform duration-300
+                hover:scale-105
+                w-fit
+                bg-black
+              "
                       >
                         View Blog
                       </Link>

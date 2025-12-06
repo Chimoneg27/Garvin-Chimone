@@ -104,7 +104,6 @@ export default function BlogPost() {
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <Navbar />
 
-      {/* Main content wrapper */}
       <main className="flex-1 w-full px-4 md:px-0">
         <article className="prose dark:prose-invert prose-lg md:prose-xl max-w-3xl mx-auto py-12">
           <div className="mb-8">
