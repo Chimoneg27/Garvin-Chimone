@@ -8,7 +8,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function signUpWithEmail() {
     setLoading(true);
@@ -21,6 +21,7 @@ export default function Signup() {
           data: {
             name: name,
           },
+          emailRedirectTo: "https://garvin-chimone.netlify.app",
         },
       });
 
@@ -31,17 +32,17 @@ export default function Signup() {
       }
       setMessage("Check your email for the confirmation link!");
       setLoading(false);
-      navigate('/')
+      navigate("/");
     } catch {
       setMessage("An unexpected error occured");
       setLoading(false);
     }
   }
 
-const isValidEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
-}
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -135,7 +136,7 @@ const isValidEmail = (email) => {
           {loading ? "Signing up..." : "Sign Up"}
         </button>
 
-        <Link to='/SignIn'>
+        <Link to="/SignIn">
           <button
             type="submit"
             disabled={loading}
