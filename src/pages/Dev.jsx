@@ -99,14 +99,14 @@ export default function Dev() {
       </div>
 
       {/* Tech Slider */}
-      <div className="w-full flex flex-col justify-center items-center mt-12 mb-12 p-5">
+      {/* <div className="w-full flex flex-col justify-center items-center mt-12 mb-12 p-5">
         <h2
           className="w-11/12 md:w-4/5 text-4xl sm:text-5xl md:text-6xl text-center font-bold mb-10"
           style={{ color }}
         >
           The Tech I Use
         </h2>
-      </div>
+      </div> */}
 
       {/* Contact Form */}
       <div className="p-6 flex flex-col justify-center items-center">
