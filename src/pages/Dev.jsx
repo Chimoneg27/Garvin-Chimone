@@ -109,7 +109,7 @@ export default function Dev() {
       </div> */}
 
       {/* Contact Form */}
-      <div className="p-6 flex flex-col justify-center items-center">
+      {/* <div className="p-6 flex flex-col justify-center items-center">
         <h2
           className="text-4xl sm:text-5xl md:text-7xl font-bold w-full text-center"
           style={{ color }}
@@ -120,7 +120,7 @@ export default function Dev() {
           Want to hire me or want to connect? Fill in the form below
         </p>
         <BasicForm />
-      </div>
+      </div> */}
 
       <Footer />
     </div>
