@@ -17,6 +17,7 @@ const Home = () => {
         <ul className="w-4/5 flex flex-col md:flex-row md:flex-wrap justify-between items-center gap-8 p-4" style={{ color: color }}>
           {[
             { id: "dev", label: "Dev", to: "/Dev" },
+            { id: "music", label: "Music", to: "/MusicLibrary" },
             { id: "books", label: "Books", to: "/Books" },
             { id: "projects", label: "Projects", to: "/Projects" },
             { id: "Blog", label: "Blogs", to: "/Blogs" },
