@@ -39,11 +39,11 @@ export default function Navbar() {
             <HouseOutlined fontSize="inherit" />
           </li>
         </Link>
-        <Link to="/MusicLibrary">
+        {/* <Link to="/MusicLibrary">
           <li>
             <MusicNoteOutlined fontSize="inherit" />
           </li>
-        </Link>
+        </Link> */}
         <Link to="/Books">
           <li>
             <Book fontSize="inherit" />

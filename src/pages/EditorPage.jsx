@@ -34,6 +34,7 @@ export default function EditorPage() {
     banner_desc: "",
     tags: "",
     date_published: "",
+    title: ""
   });
 
   const handleChange = (e) => {
@@ -49,6 +50,7 @@ export default function EditorPage() {
 
     const payload = {
       author: form.author.trim(),
+      title: form.title.trim(),
       main_body: body.trim(),
       date_published: form.date_published
         ? new Date(form.date_published).toISOString()
@@ -61,7 +63,7 @@ export default function EditorPage() {
         .filter(Boolean),
     };
 
-    if (!payload.author || !payload.main_body) {
+    if (!payload.author || !payload.main_body || !payload.title) {
       setStatus("error");
       setMsg("Please provide the author and a proper blog post");
       return;
@@ -78,6 +80,7 @@ export default function EditorPage() {
         banner: "",
         banner_desc: "",
         tags: "",
+        title: "",
       });
       setBody("# Start here");
     } catch (err) {
@@ -158,6 +161,20 @@ export default function EditorPage() {
               required
               placeholder="e.g. personal, tech, notes, python"
               value={form.tags}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Title*
+            </label>
+            <input
+              name="title"
+              required
+              placeholder="Enter the blog title"
+              value={form.title}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             />
