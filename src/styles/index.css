@@ -1,64 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Funnel%20Display:700|Rosario:400');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'Borg9';
-    src: url('../assets/fonts/borg-9/Borg9.otf') format('opentype');
-}
-
-.intro {
-    margin: 2rem auto;
-}
-
 body {
-    font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Rosario';
+  font-weight: 400;
 }
 
-.about {
-    margin: 2rem auto;
+h1, h2, h3, h4, h5 {
+  font-family: 'Funnel Display';
+  font-weight: 700;
 }
 
-.heading {
-    font-family: "Orbitron", sans-serif;
-}
+html {font-size: 100%;} /* 16px */
 
-footer ul {
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
+h1 {font-size: 4.210rem; /* 67.36px */}
 
-footer ul li {
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
+h2 {font-size: 3.158rem; /* 50.56px */}
 
-footer .footerCircle {
-  position: static !important;
-  bottom: auto !important;
-  left: auto !important;
-  transform: none !important; /* Remove the translateX transform */
-  border-radius: 50%;
-  z-index: auto !important;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}
+h3 {font-size: 2.369rem; /* 37.92px */}
 
-/* Ensure split text alignment */
-.split-parent {
-  width: 100%;
-}
+h4 {font-size: 1.777rem; /* 28.48px */}
 
-/* Remove any default browser margins that might affect centering */
-* {
-  box-sizing: border-box;
-}
+h5 {font-size: 1.333rem; /* 21.28px */}
 
-.navbar h1 {
-    font-family: 'Borg9', sans-serif;
-    font-weight: 400;
-}
+small {font-size: 0.750rem; /* 12px */}
