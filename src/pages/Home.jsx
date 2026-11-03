@@ -47,6 +47,10 @@ const Home = () => {
             <span className="inline-block w-[10em] whitespace-nowrap text-left tabular-nums font-medium text-purple-700">{time}</span>. Thanks for stopping by.
           </p>
         </div>
+
+        <div className="w-full max-w-7xl mt-14">
+          <h2 className="text-3xl">Projects</h2>
+        </div>
       </main>
     </div>
   );
