@@ -47,10 +47,10 @@ const Home = () => {
             in <b className="font-medium text-purple-700">Benoni, South Africa</b> where the local time is{" "}
             <span className="whitespace-nowrap tabular-nums font-medium text-purple-700">{time}</span>. Thanks for stopping by.
           </p>
-        </div>
 
-        <div className="mt-10 w-full max-w-5xl sm:mt-14">
-          <h2>Projects</h2>
+          <p className="w-full text-3xl max-w-6xl text-left leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
+            You can view some of my <Link to="/projects" className="underline">projects</Link> here.
+          </p>
         </div>
       </main>
     </div>
