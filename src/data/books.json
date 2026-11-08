@@ -1,0 +1,221 @@
+[
+  {
+    "title": "A Game of Thrones",
+    "author": "George R.R. Martin",
+    "cover": "https://cdn.thestorygraph.com/cdhf553oh0zgtsrpffiy9bmctgmk",
+    "color": "text-purple-700"
+  },
+  {
+    "title": "A Clash of Kings",
+    "author": "George R.R. Martin",
+    "cover": "https://cdn.thestorygraph.com/ixce9ov3zka6sfqgqx8wwb0cdgpj",
+    "color": "text-purple-700"
+  },
+  {
+    "title": "A Storm of Swords: Steel & Snow",
+    "author": "George R.R. Martin",
+    "cover": "https://cdn.thestorygraph.com/ex09arj0eofh49119wr2bgp2k866",
+    "color": "text-purple-700"
+  },
+  {
+    "title": "A Storm of Swords: Blood & Gold",
+    "author": "George R.R. Martin",
+    "cover": "https://cdn.thestorygraph.com/ex09arj0eofh49119wr2bgp2k866",
+    "color": "text-purple-700"
+  },
+  {
+    "title": "Things Fall Apart",
+    "author": "Chinua Achebe",
+    "cover": "https://cdn.thestorygraph.com/c33ox5foe0mqh4ggylgytseokb54",
+    "color": "text-black"
+  },
+  {
+    "title": "How to Read a Book: The Classic Guide to Intelligent Reading",
+    "author": "Mortimer J. Adler",
+    "cover": "https://cdn.thestorygraph.com/3ekrm5cr6wa86wwdb16qtw2rfpbn",
+    "color": "text-black"
+  },
+    {
+    "title": "The Psychology of Money: Timeless Lessons on Wealth, Greed, and Happiness",
+    "author": "Morgan Housel",
+    "cover": "https://cdn.thestorygraph.com/6vuwyhye11lrq3zbtir2579f1f82",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "The Beautyful Ones Are Not Yet Born",
+    "author": "Ayi Kwei Armah",
+    "cover": "https://cdn.thestorygraph.com/z6e3j1ih9lmseohwngu5wq9sqr4b",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "Speak Like a CEO: Secrets for Commanding Attention and Getting Results",
+    "author": "Suzanne Bates",
+    "cover": "https://cdn.thestorygraph.com/rxzyapldk6qhp61ddk2742k1jdtn",
+    "color": "text-black"
+  },
+    {
+    "title": "Ego is the Enemy",
+    "author": "Ryan Holiday",
+    "cover": "https://cdn.thestorygraph.com/fje3ndrlghhxgzdgsxc8q7g6t1o5",
+    "color": "text-black"
+  },
+    {
+    "title": "The Rise of Kyoshi",
+    "author": "F.C. Yee",
+    "cover": "https://cdn.thestorygraph.com/8hnpp2zdvscw9vrcloel06llg62q",
+    "color": "text-black"
+  },
+    {
+    "title": "The Shadow of Kyoshi",
+    "author": "F.C. Yee",
+    "cover": "https://cdn.thestorygraph.com/nrxlljwmlf6zwj6ady7ljtfda44y",
+    "color": "text-black"
+  },
+    {
+    "title": "Digital Fortress",
+    "author": "Dan Brown",
+    "cover": "https://cdn.thestorygraph.com/tr9dgkkl7vbfbofp5td2dwgxpepi",
+    "color": "text-black"
+  },
+    {
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "cover": "https://cdn.thestorygraph.com/9mrftrg34xx86a4y00owat2hq7jn",
+    "color": "text-black"
+  },
+    {
+    "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+    "author": "James Clear",
+    "cover": "https://cdn.thestorygraph.com/wftfnvcwi2cmgaqbd43y2xtudzh4",
+    "color": "text-black"
+  },
+    {
+    "title": "The Stellenbosch Mafia: Inside the Billionaire’s Club",
+    "author": "Pieter Du Toit",
+    "cover": "https://cdn.thestorygraph.com/lx4a9attmwxadvx04r6gohe3bgh4",
+    "color": "text-black"
+  },
+    {
+    "title": "Crowned for the Prince's Heir",
+    "author": "Sharon Kendrick",
+    "cover": "https://cdn.thestorygraph.com/2iykp3a6vvg3ga883cgc1tmwf4y4",
+    "color": "text-black"
+  },
+    {
+    "title": "The Climber",
+    "author": "Shin-ichi Sakamoto",
+    "cover": "https://cdn.thestorygraph.com/xizzskembds6fb73iatcao39hfod",
+    "color": "text-black"
+  },
+    {
+    "title": "Eyeshield 21",
+    "author": "Riichiro Inagaki",
+    "cover": "https://cdn.thestorygraph.com/zd069l4fx85574vq82bohda38xtq",
+    "color": "text-black"
+  },
+    {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "cover": "https://cdn.thestorygraph.com/i5f0keg0ajcf8f0l3qoqlg8wzx5d",
+    "color": "text-black"
+  },  {
+    "title": "Vinland Saga",
+    "author": "Makoto Yukimura",
+    "cover": "https://cdn.thestorygraph.com/9vxswgskvm7y5wtrwmjp8yyu8soj",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "Great Expectations",
+    "author": "Charles Dickens",
+    "cover": "https://cdn.thestorygraph.com/u3dgak8of8co3r92fsc4pez6ohpb",
+    "color": "text-black"
+  },
+    {
+    "title": "The 48 Laws of Power",
+    "author": "Robert Greene",
+    "cover": "https://cdn.thestorygraph.com/iwarcq56vvfqdyq4zz53d0nngv2x",
+    "color": "text-black"
+  },
+    {
+    "title": "The Prince: Niccolò Machiavelli",
+    "author": "Niccolò Machiavelli",
+    "cover": "https://cdn.thestorygraph.com/vlq95cl4rvo4h5hjtsmoxfqwe08y",
+    "color": "text-black"
+  },  {
+    "title": "Game of Life and How to Play It ",
+    "author": "Florence Scovel Shinn",
+    "cover": "https://cdn.thestorygraph.com/7rd0hwwkhgllnnh7hqipkj152gdc",
+    "color": "text-black"
+  },
+    {
+    "title": "Discipline Is Destiny: The Power of Self-Control",
+    "author": "Ryan Holiday",
+    "cover": "https://cdn.thestorygraph.com/y3u19wu8xvj51dg35qrg75hy2350",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "Cry, the Beloved Country ",
+    "author": "Alan Paton",
+    "cover": "https://cdn.thestorygraph.com/hgoxc5ruc9kauex5jya9y8gey22g",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "As a Man Thinketh",
+    "author": "James Allen",
+    "cover": "https://cdn.thestorygraph.com/o6fmeypy546g0umoglcz8sfjal0f",
+    "color": "text-black"
+  },
+    {
+    "title": "The Way of the Superior Man",
+    "author": "David Deida",
+    "cover": "https://cdn.thestorygraph.com/x2lkv15uncowtnji2fzl8b8iy1n8",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "The Deceiver",
+    "author": "Frederick Forsyth",
+    "cover": "https://cdn.thestorygraph.com/bjcldtyeeyp95z2zq0bk73mqdrvt",
+    "color": "text-black"
+  },
+    {
+    "title": "Zero To One",
+    "author": "Peter Thiel",
+    "cover": "https://cdn.thestorygraph.com/giiohwz70orcl70rp31zzlaf91y9",
+    "color": "text-black"
+  },
+    {
+    "title": "The Hobbit",
+    "author": "J.R.R Tolkien",
+    "cover": "https://cdn.thestorygraph.com/qaghidyp9m0d9rkxuqr2q368utm1",
+    "color": "text-black"
+  },  {
+    "title": "The 33 Strategies of War",
+    "author": "Robert Greene",
+    "cover": "https://cdn.thestorygraph.com/t85b7gkrtf9lrdueiufi8o16c9aq",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "The Fellowship of the Ring",
+    "author": "J.R.R Tolkien",
+    "cover": "https://cdn.thestorygraph.com/baemfxys8xsxm8j2to8bxxiv1qha",
+    "color": "text-black"
+  },
+    {
+    "title": "The Two Towers",
+    "author": "J.R.R Tolkien",
+    "cover": "https://cdn.thestorygraph.com/i44uj5fakyhc4s0vdqx52bfdwtl8",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "The Return of the King",
+    "author": "J.R.R Tolkien",
+    "cover": "https://cdn.thestorygraph.com/igl6ii9qfj3mvtpigkdue3zbug58",
+    "color": "text-purple-700"
+  },
+    {
+    "title": "Teach Yourself How to Learn",
+    "author": "Saundra Yancy McGuire",
+    "cover": "https://cdn.thestorygraph.com/n9vkpm5w3jemi6y7vis47e36mqy4",
+    "color": "text-black"
+  }
+]

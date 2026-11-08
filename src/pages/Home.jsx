@@ -1,5 +1,6 @@
 import NavBar from "../components/navbar";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const formatTime = (date) => {
   return new Intl.DateTimeFormat("en-US", {
@@ -24,16 +25,16 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="min-h-screen w-screen bg-white text-black">
+    <div className="min-h-screen w-full bg-white text-black">
       <NavBar />
 
-      <main className="px-6 md:px-10 pb-16 flex flex-col items-center">
-        <div className="max-w-7xl text-2xl md:text-3xl flex flex-col gap-6 font-extralight tracking-tight">
-          <h1 className="font-bold text-5xl tracking-tighter my-12">
+      <main className="mx-auto w-full max-w-7xl px-5 pb-12 sm:px-8 sm:pb-16 lg:px-10">
+        <div className="flex w-full flex-col gap-5 font-extralight tracking-tight sm:gap-6">
+          <h1 className="font-bold tracking-tight sm:my-8 md:my-10">
             Garvin Chimone
           </h1>
 
-          <p className="mx-auto w-full max-w-7xl text-justify text-3xl">
+          <p className="w-full text-3xl max-w-6xl text-left leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
             I&apos;m a <b className="font-medium text-purple-700">Frontend-Focused Full-Stack Software Engineer</b>.
             I build web apps with React, TypeScript, Node.js, Supabase
             and PostgreSQL, and I also have hands-on experience with Angular.
@@ -42,14 +43,14 @@ const Home = () => {
             from the database schema to the UI. I&apos;m now learning AWS cloud and
             working toward AWS certifications, because I want to understand how
             the apps I build are deployed, secured and scaled. Besides code, I
-            enjoy reading, mathematics and currently learning Spanish. I live
+            enjoy <Link className="underline" to="/books">reading</Link>, mathematics and currently learning Spanish. I live
             in <b className="font-medium text-purple-700">Benoni, South Africa</b> where the local time is{" "}
-            <span className="inline-block w-[10em] whitespace-nowrap text-left tabular-nums font-medium text-purple-700">{time}</span>. Thanks for stopping by.
+            <span className="whitespace-nowrap tabular-nums font-medium text-purple-700">{time}</span>. Thanks for stopping by.
           </p>
-        </div>
 
-        <div className="w-full max-w-7xl mt-14">
-          <h2 className="text-3xl">Projects</h2>
+          <p className="w-full text-3xl max-w-6xl text-left leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
+            You can view some of my <Link to="/projects" className="underline">projects</Link> here.
+          </p>
         </div>
       </main>
     </div>

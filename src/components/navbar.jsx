@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavBar = () => {
   return (
-    <nav className="w-full flex justify-end mt-3 mb-2 pr-10">
+    <nav className="mt-3 mb-2 flex w-full justify-end px-5 sm:px-8 lg:px-10">
       <ul className="flex gap-4">
         <li><a href="https://www.linkedin.com/in/garvin-chimone/" aria-label="LinkedIn"><FontAwesomeIcon icon={faLinkedinIn} style={{ color: "#9814cd" }} size="lg" /></a></li>
         <li><a href="https://github.com/Chimoneg27" aria-label="GitHub"><FontAwesomeIcon icon={faGithub} style={{ color: "#9814cd" }} size="lg" /></a></li>
