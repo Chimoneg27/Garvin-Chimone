@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { Link, useParams } from "react-router";
+import Carousel from "../components/carousel";
 
 const ProjectDetail = () => {
   const [projects, setProjects] = useState([]);
@@ -37,9 +38,41 @@ const ProjectDetail = () => {
         <Link className="underline" to="/">
           Garvin Chimone
         </Link>{" "}
-        / <Link className="underline">Projects</Link>{" "}
+        /{" "}
+        <Link className="underline" to="/projects">
+          Projects
+        </Link>{" "}
         / {project.name}
       </h1>
+
+      <ul className="space-y-6">
+        <li className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-16">
+          <h4>Link</h4>
+          <a
+            href={`https://preview--playful-design-start.lovable.app/`}
+            className="underline"
+          >
+            {project.name}
+          </a>
+        </li>
+        <li className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-16">
+          <h4 className="shrink-0">Tech</h4>
+          <div className="flex flex-wrap">
+            {project.tech_stack?.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full bg-gray-200 px-3 py-1.5 text-sm font-medium text-black"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </li>
+      </ul>
+
+      <p className="text-2xl mt-14">{project.full_desc}</p>
+
+      <Carousel images={project.images} />
     </div>
   );
 };
