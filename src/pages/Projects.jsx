@@ -4,6 +4,13 @@ import { Link } from "react-router";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const slugifyProjectName = (name = "") =>
+  name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,7 +48,7 @@ const Projects = () => {
         {projects.map((project) => (
           <li key={project.id}>
             <Link
-              to={`/projects/${project.id}`}
+              to={`/projects/${slugifyProjectName(project.name)}`}
               className="flex items-center justify-between border-y border-solid border-purple-700 px-6 py-5 hover:bg-purple-700 hover:text-white md:px-10"
             >
               <div className="flex items-center gap-5">

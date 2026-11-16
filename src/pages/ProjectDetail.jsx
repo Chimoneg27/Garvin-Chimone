@@ -3,12 +3,19 @@ import { supabase } from "../lib/supabase";
 import { Link, useParams } from "react-router";
 import Carousel from "../components/carousel";
 
+const slugifyProjectName = (name = "") =>
+  name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 const ProjectDetail = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const { id } = useParams();
+  const { projectName } = useParams();
 
   useEffect(() => {
     async function fetchProjects() {
@@ -26,7 +33,10 @@ const ProjectDetail = () => {
     fetchProjects();
   }, []);
 
-  const project = projects.find((p) => String(p.id) === id);
+  const project = projects.find(
+    (p) =>
+      slugifyProjectName(p.name) === projectName || String(p.id) === projectName
+  );
 
   if (loading) return <p>Loading...</p>;
   if (errorMsg) return <p>Error: {errorMsg}</p>;
@@ -49,7 +59,9 @@ const ProjectDetail = () => {
         <li className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-16">
           <h4>Link</h4>
           <a
-            href={`https://preview--playful-design-start.lovable.app/`}
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
             className="underline"
           >
             {project.name}
