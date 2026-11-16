@@ -7,7 +7,7 @@ import './styles/index.css'
 // trailingCursor
 new followingDotCursor({
   particles: 8,
-  rate: 0.6,
+  rate: 0.1,
   baseImageSrc: "",
   color: "#7E22CE",
   size: 3
