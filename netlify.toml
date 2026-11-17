@@ -1,0 +1,4 @@
+[build.environment]
+  # These browser-facing Supabase settings are intentionally embedded by Vite.
+  # Keep scanning enabled for all other environment variables and files.
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_PUBLISHABLE_KEY,VITE_SUPABASE_URL"
