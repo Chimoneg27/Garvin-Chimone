@@ -43,7 +43,7 @@ const Home = () => {
             from the database schema to the UI. I&apos;m now learning AWS cloud and
             working toward AWS certifications, because I want to understand how
             the apps I build are deployed, secured and scaled. Besides code, I
-            enjoy <Link className="underline" to="/books">reading</Link>, mathematics and currently learning German. I live
+            enjoy <Link className="underline" to="/books">reading</Link>, and mathematics. I live
             in <b className="font-medium text-purple-700">Benoni, South Africa</b> where the local time is{" "}
             <span className="whitespace-nowrap tabular-nums font-medium text-purple-700">{time}</span>. Thanks for stopping by.
           </p>
